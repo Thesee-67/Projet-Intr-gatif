@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <title>Ajoute Collecte de Données</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="form-container">
+    <form method="post" action="/Collecte/traitement/">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Envoyer les données">
+    </form>
+</div>
+</body>
+</html>
