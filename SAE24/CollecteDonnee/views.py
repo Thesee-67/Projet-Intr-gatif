@@ -16,13 +16,13 @@ def ajout(request):
     else:
         form = CollecteForm()
     
-    return render(request, 'ajout.html', {'form': form})
+    return render(request, 'CollecteDonnee/ajout.html', {'form': form})
 
 def traitement(request):
     lform = CollecteForm(request.POST)
     if lform.is_valid():
         collecte = lform.save()
-        return render(request, 'affiche.html', {'collecte': collecte})
+        return render(request, 'CollecteDonnee/affiche.html', {'collecte': collecte})
     else:
         return render(request, 'CollecteDonnee/ajout.html', {'form': lform})
 
