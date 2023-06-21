@@ -1,0 +1,22 @@
+{% extends 'Collecte/main.html' %}
+
+{% block title %}
+Collecte
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <ul>
+        {% for enseignant in enseignants %}
+            <li>
+                {{ Collecte.id }} {{Collecte.piece }} {{ Collecte.prénom }}
+                <a href="../../Collecte/update=/{{ Collecte.id }}" >Modifier</a>
+                <a href="../../Collecte/delete=/{{Collecte.id }}" >Supprimer</a>
+                  
+            </li>
+        {% endfor %}
+        <br>
+        <a href="../../Collecte/ajout" class="btn">Ajouter un Collecte</a>
+    </ul>
+</div>
+{% endblock %}
