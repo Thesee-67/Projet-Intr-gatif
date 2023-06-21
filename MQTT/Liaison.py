@@ -36,8 +36,8 @@ with open(fichier_csv, 'r') as csvfile:
         values = extract_values(data)
 
         # Requête d'insertion des données dans la table
-        query = "INSERT INTO nom_de_la_table (Id, piece, date, heure, temp) VALUES (?, ?, ?, ?, ?)"
-        params = (values['Id'], values['piece'], values['date'], values['heure'], values['temp'])
+        query = "INSERT INTO Collecte (id, piece, date, heure, temp) VALUES (?, ?, ?, ?, ?)"
+        params = (values['id'], values['piece'], values['date'], values['heure'], values['temp'])
 
         # Exécution de la requête d'insertion
         cursor.execute(query, params)
