@@ -12,7 +12,7 @@ def ajout(request):
         form = CollecteForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'CollecteDonnee/affiche.html')
+            return render(request, 'affiche.html')
     else:
         form = CollecteForm()
     

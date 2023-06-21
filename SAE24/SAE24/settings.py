@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'CollecteDonnee.apps.CollecteDonneConfig',
+    'CollecteDonnee',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
