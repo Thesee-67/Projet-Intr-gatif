@@ -1,11 +1,183 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>  
     <title>Collecte de Données</title>
     <meta charset="UTF-8">
+    <style>
+    #navbar {
+    background-color: #2bc9f5;
+    color: #fff;
+    padding: 10px;
+    text-align: center; /* +++mid */
+    margin-bottom: 3%;
+  }
+  
+  #navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #navbar ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  #navbar a {
+    font-size: 20px; /* zoom */
+  }
+  
+  
+  #main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .box {
+    width: calc(60% - 5%); /* 50% - 5% mid */
+    margin-bottom: 10%; /* Laissez 10 % d'espace au-dessus et au-dessous */
+    padding: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Calcule la largeur totale de la boîte englobante dans le modèle de boîte */
+  }
+  
+  .title {
+    font-family: "Raleway";
+    font-size: 24px;
+    font-weight: 700;
+    color: #5D4037;
+    text-align: center;
+  }
+  
+  p {
+    line-height: 1.5em;
+  }
+  
+  h1 + p, p + p {
+    margin-top: 10px;
+  }
+  
+  .container {
+    padding: 40px 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+  }
+  
+  
+  .card-wrap {
+    margin: 10px;
+    display: inline-block;
+    transform: perspective(800px);
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+  .card-wrap:hover .card-info {
+    transform: translateY(0);
+  }
+  .card-wrap:hover .card-info p {
+    opacity: 1;
+  }
+  .card-wrap:hover .card-info, .card-wrap:hover .card-info p {
+    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .card-wrap:hover .card-info:after {
+    transition: 5s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .card-wrap:hover .card-bg {
+    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 5s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0.8;
+  }
+  .card-wrap:hover .card {
+    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 2s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px, rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset white 0 0 0 6px;
+  }
+  
+  .card {
+    position: relative;
+    flex: 0 0 240px;
+    width: 240px;
+    height: 320px;
+    background-color: #333;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
+    transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+  
+  .card-bg {
+    opacity: 0.5;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95), opacity 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    pointer-events: none;
+  }
+  
+  .card-info {
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    transform: translateY(40%);
+    transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .card-info p {
+    opacity: 0;
+    text-shadow: black 0 2px 3px;
+    transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .card-info * {
+    position: relative;
+    z-index: 1;
+  }
+  .card-info:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    background-blend-mode: overlay;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+  
+  .card-info h1 {
+    font-family: "Playfair Display";
+    font-size: 36px;
+    font-weight: 700;
+    text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
+  }
+    </style>
 </head>
 <body>
+  <div id="navbar">
     <h1>Bienvenue sur la page de collecte de données!</h1>
     <p>Ici, vous pouvez afficher le contenu de votre page de collecte de données.</p>
+    <a href="/ajout/" class="card-wrap">
+        <div class="card">
+          <div class="card-bg" style="background-image: url('/static/image/1.png'); width: 100%; height: 80%;"></div>
+          <div class="card-info">
+            <h1>ajout</h1>
+          </div>
+        </div>
+      </a>
+  </div>
 </body>
 </html>
