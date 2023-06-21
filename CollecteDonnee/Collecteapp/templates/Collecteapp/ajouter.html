@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{%static '/Collecteapp/ajouter.css'%}">
+{% endblock %}
+
+{% block content %}
+    {% block subtitle %}
+    {% endblock %}
+    
+    <div class="container">
+        {% block method %}
+            <form method="post" enctype="multipart/form-data">
+        {% endblock %}
+           
+            {% block form %}
+            {% endblock %}
+            
+            <button class="btn" type="submit">Enregistrer</button>
+        </form>
+    </div>
+{% endblock %}

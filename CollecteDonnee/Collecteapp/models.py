@@ -78,7 +78,7 @@ class AuthUserUserPermissions(models.Model):
 
 
 class Capteur(models.Model):
-    nom_capteur = models.CharField(primary_key=True, max_length=40)
+    di = models.CharField(primary_key=True, max_length=40)
     piece = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
@@ -132,11 +132,11 @@ class DjangoSession(models.Model):
 
 
 class Donnees(models.Model):
-    id = models.AutoField(primary_key=True)  # Field name made lowercase.
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     heure = models.CharField(max_length=255, blank=True, null=True)
     jour = models.CharField(max_length=255, blank=True, null=True)
     temps = models.FloatField(blank=True, null=True)
-    nom_capteur = models.ForeignKey(Capteur, blank=True, null=True, on_delete=models.CASCADE)
+    di = models.ForeignKey(Capteur, models.DO_NOTHING, db_column='di', blank=True, null=True)
 
     class Meta:
         managed = False

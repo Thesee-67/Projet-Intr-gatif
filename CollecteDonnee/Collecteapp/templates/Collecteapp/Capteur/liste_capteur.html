@@ -7,6 +7,7 @@
 
 {% block content %}
     <div class="container">
+        <a href="/Collecteapp/Capteur/ajouter_capteur" class="btn">Ajouter un nouveau Capteur</a>
         <h2>Liste des Informations sur le Capteur</h2>
         <table>
             <thead>
@@ -19,11 +20,12 @@
             <tbody>
                 {% for capteur in capteurs %}
                 <tr>
-                    <td>{{ capteur.nom_capteur }}</td>
+                    <td>{{ capteur.di }}</td>
                     <td>{{ capteur.piece }}</td>
                     <td>
                     <form>
-                        <a href="/Collecteapp/Capteur/modifier_capteur/{{capteur.id}}/" class="btn-modifier">Modifier</a>
+                        <a href="/Collecteapp/Capteur/modifier_capteur/{{capteur.di}}/" class="btn-modifier">Modifier</a>
+                        <a href="/Collecteapp/Capteur/supprimer_capteur/{{capteur.di}}/" class="btn-modifier">Supprimer</a>
                     </form>
                     </td>
                 </tr>

@@ -1,0 +1,16 @@
+{% extends "Collecteapp/modifier.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>Modifier le Informations du Capteur"{{ capteurs.di }}"</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.di.label_tag }}
+            {{ form.di }}
+            {{ form.piece.label_tag }}
+            {{ form.piece }}
+            <button type="submit" class="btn-modifier">Modifier</button>
+            <a href="/Collecteapp/Capteur/liste_capteur/" class="btn-annuler">Annuler</a>
+        </form>
+    </div>
+{% endblock %}
