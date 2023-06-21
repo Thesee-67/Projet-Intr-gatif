@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {% block css %}
+    {% endblock %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{%static '/G7App/index.css'%}">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <header>
+        {% block header%}
+            <h1>Interface de la Récupération de Donnees</h1>
+        {% endblock %}
+    </header>
+    
+    {% block sidebar %}
+        <nav>
+            <ul>
+                <li><a href="/G7App/index">Accueil</a></li>
+                <li><a href="/G7App/Capteur/liste">Capteur</a></li>
+                <li><a href="/G7App/Donnes/liste">Liste</a></li>
+            </ul>
+          </nav>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block content2 %}
+    {% endblock %}
+
+</body>
+
+</html>
