@@ -1,3 +1,49 @@
-*{
-    background-color: aqua;
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    background: linear-gradient(
+      rgba(4, 99, 128, 0.6),
+      rgba(220, 180, 2, 0.6)
+    );
+  }
+
+body {
+    font-family: montserrat, arial, verdana;
+}
+
+.Title{
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    position: fixed;
+    left: 20%;
+    right: 20%;
+    margin-top: 50px;
+    text-align: center;
+}
+
+li{
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+}
+
+.bouttonacc{
+    display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  margin: 10px;
+  text-decoration: none;
+  border-radius: 5px;
 }

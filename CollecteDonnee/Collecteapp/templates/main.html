@@ -9,6 +9,7 @@
     {% load static %}
 
     <link rel="stylesheet" type="text/css" href="{%static '/Collecteapp/style.css'%}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <title>
         {% block title %}
         {% endblock %}
@@ -18,16 +19,16 @@
 <body>
     <header>
         {% block header%}
-            <h1>Interface de la Récupération de Donnees</h1>
+            <h1 class="Title" data-aos="fade-up" data-aos-duration="2000">Interface de la Récupération de Donnees</h1>
         {% endblock %}
     </header>
     
     {% block sidebar %}
         <nav>
             <ul>
-                <li><a href="/Collecteapp/index">Accueil</a></li>
-                <li><a href="/Collecteapp/Capteur/liste_capteur">Capteur</a></li>
-                <li><a href="/Collecteapp/Donnes/liste">Liste</a></li>
+                <li><a href="/Collecteapp/index"><input type="button" class="bouttonacc" value="Accueil" /></a></li>
+                <li><a href="/Collecteapp/Capteur/liste_capteur"><input type="button" class="bouttonacc" value="Capteur" /></a></li>
+                <li><a href="/Collecteapp/Donnes/liste"><input type="button" class="bouttonacc" value="liste" /></a></li>
             </ul>
           </nav>
     {% endblock %}
@@ -37,6 +38,10 @@
 
     {% block content2 %}
     {% endblock %}
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 </body>
 
