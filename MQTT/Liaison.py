@@ -32,12 +32,15 @@ with open(fichier_csv, 'r') as csvfile:
     cursor = conn.cursor()
     for row in reader:
         # Récupération des valeurs du fichier CSV
-        data = row[0]  # Supposons que la première colonne contient les données
-        values = extract_values(data)
+        id_val = row[0]
+        piece_val = row[1]
+        date_val = row[2]
+        heure_val = row[3]
+        temp_val = row[4]
 
         # Requête d'insertion des données dans la table
         query = "INSERT INTO Collecte (id, piece, date, heure, temp) VALUES (?, ?, ?, ?, ?)"
-        params = (values['id'], values['piece'], values['date'], values['heure'], values['temp'])
+        params = (id_val, piece_val, date_val, heure_val, temp_val)
 
         # Exécution de la requête d'insertion
         cursor.execute(query, params)
