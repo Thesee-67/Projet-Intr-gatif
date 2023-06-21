@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/Collecteapp/confirmation.css' %}">
+{% endblock %}
+
+{% block title %}
+    Confirmation
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Enregistrement réussi</h2>
+        <p>Merci, les données ont été enregistrées avec succès dans la base de données.</p>
+        <form>
+            {% block bouton %}
+            {% endblock %}
+        </form>
+    </div>
+{% endblock %}

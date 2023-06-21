@@ -1,0 +1,21 @@
+{% extends "Collecteapp/ajouter.html" %}
+
+{% block title %}
+    Ajouter un nouveau Capteur
+{% endblock %}
+
+{% block subtitle %}
+    <h2> Ajouter un nouveau Capteur </h2>
+{% endblock %} 
+
+{% block form %}
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_nom_capteur">Nom_capteur :</label>
+        {{ form.di}}
+    </div>
+    <div class="form-group">
+        <label for="id_piece">Piece :</label>
+        {{ form.piece }}
+    </div>
+{% endblock %}
