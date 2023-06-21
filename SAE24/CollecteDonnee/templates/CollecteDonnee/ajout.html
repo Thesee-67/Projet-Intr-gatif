@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="form-container">
-    <form method="post" action="/Collecte/traitement/">
+    <form method="post" action="/traitement/">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Envoyer les données">
