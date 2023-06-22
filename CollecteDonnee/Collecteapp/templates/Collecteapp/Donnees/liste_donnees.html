@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container-listcap">
-    <a href="/Collecteapp/Donnees/ajouter_donnees" class="btn-ajout">Ajouter des données</a>
+    <a href="/Collecteapp/Donnees/ajouter_donnees/" class="btn-ajout">Ajouter des données</a>
     <table>
         <caption>Liste des Donnees</caption>
         <thead>
@@ -21,11 +21,11 @@
         <tbody>
             {% for donnes in donnees %}
                 <tr>
-                    <td data-th="Heure">{{ donnes.heure }}</td>
-                    <td data-th="Jour">{{ donnes.jour }}</td>
-                    <td data-th="Température">{{ donnes.temps}}</td>
-                    <td data-th="Nom du Capteur">{{ donnes.di }}</td>
-                    <td data-th="Actions">
+                    <td>{{ donnes.heure }}</td>
+                    <td>{{ donnees.jour }}</td>
+                    <td>{{ donnees.temps }}</td>
+                    <td>{{ donnees.capteur }}</td>
+                    <td>
                         <form>
                           <a href="/Collecteapp/Donnees/modifier_donnees/{{donnes.id}}/"class="btn-modifier">Modifier</a>
                           <a href="/Collecteapp/Donnees/supprimer_donnees/{{donnes.id}}/"class="btn-supprimer">Supprimer</a>
@@ -34,7 +34,7 @@
                 </tr>
             {% empty %}
             <tr>
-                <td colspan="2">Aucun Film enregistré.</td>
+                <td colspan="2">Aucunne Donnees enregistré.</td>
             </tr>
             {% endfor %}
         </tbody>

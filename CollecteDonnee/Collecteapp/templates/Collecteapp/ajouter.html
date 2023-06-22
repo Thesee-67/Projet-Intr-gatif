@@ -2,22 +2,22 @@
 
 {% block css %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static '/Collecteapp/ajouter.css'%}">
 {% endblock %}
 
 {% block content %}
+    {% block subtitle %}
+    {% endblock %}
+    
     <div class="container">
-        <h2>{% block subtitle %}Ajouter un nouveau Donnees{% endblock %}</h2>
-        
         {% block method %}
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
+        <form method="post" enctype="multipart/form-data">
         {% endblock %}
            
-                {% block form %}
-                {% endblock %}
+            {% block form %}
+            {% endblock %}
             
-                <button class="btn" type="submit">Enregistrer</button>
-            </form>
-        </div>
+            <button class="btn" type="submit">Enregistrer</button>
+        </form>
+    </div>
 {% endblock %}

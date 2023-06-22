@@ -136,7 +136,9 @@ class Donnees(models.Model):
     heure = models.CharField(max_length=255, blank=True, null=True)
     jour = models.CharField(max_length=255, blank=True, null=True)
     temps = models.FloatField(blank=True, null=True)
-    di = models.ForeignKey(Capteur, models.DO_NOTHING, db_column='di', blank=True, null=True)
+    capteur = models.ForeignKey(Capteur,  on_delete=models.CASCADE, db_column='capteur', blank=True, null=True)
+
+
 
     class Meta:
         managed = False
