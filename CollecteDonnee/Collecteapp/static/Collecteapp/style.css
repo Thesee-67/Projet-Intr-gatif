@@ -23,6 +23,24 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+#navbar {
+  color: #fff;
+  padding: 10px;
+  text-align: center; /* +++mid */
+  margin-bottom: 3%;
+}
+
+#navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#navbar ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
 .Title{
     font-size: 50px;
     font-weight: bold;
@@ -32,29 +50,28 @@ body {
     right: 20%;
     margin-top: 50px;
     text-align: center;
+
 }
 
-li{
-    display: inline-block;
-}
-
-a {
-    text-decoration: none;
-}
-
-.container{
+.container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  top: 20%;
+  
+}
+
+.item {
+  width: 10em;
 }
 
 .box {
-  width: calc(60% - 5%); /* 50% - 5% mid */
-  margin-bottom: 10%; /* Laissez 10 % d'espace au-dessus et au-dessous */
+  width: calc(60% - 5%); 
+  margin-bottom: 10%; 
   padding: 20px;
   background-color: #f2f2f2;
   border: 1px solid #ccc;
-  box-sizing: border-box; /* Calcule la largeur totale de la boîte englobante dans le modèle de boîte */
+  box-sizing: border-box; 
 }
 
 .card-wrap {
@@ -63,7 +80,9 @@ a {
   transform: perspective(800px);
   transform-style: preserve-3d;
   cursor: pointer;
+
 }
+
 .card-wrap:hover .card-info {
   transform: translateY(0);
 }
@@ -151,4 +170,89 @@ a {
   font-size: 36px;
   font-weight: 700;
   text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
+}
+
+
+
+
+.table {
+  margin: 1em 0;
+  min-width: 300px; 
+  
+  tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    display: none;
+  }
+  
+  td {
+    display: block; 
+    
+    &:first-child {
+      padding-top: .5em;
+    }
+    &:last-child {
+      padding-bottom: .5em;
+    }
+
+    &:before {
+      content: attr(data-th)": "; 
+      font-weight: bold;
+
+      width: 6.5em; 
+      display: inline-block;
+      
+      @media (min-width: breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+  
+  th, td {
+    text-align: left;
+    
+    @media (min-width: breakpoint-alpha) {
+      display: table-cell;
+      padding: .25em .5em;
+      
+      &:first-child {
+        padding-left: 0;
+      }
+      
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+  }
+  
+  
+}
+.table {
+  background: #34495E;
+  color: #fff;
+  border-radius: .4em;
+  overflow: hidden;
+  tr {
+    border-color: lighten(#34495E, 10%);
+  }
+  th, td {
+    margin: .5em 1em;
+    @media (min-width: breakpoint-alpha) { 
+      padding: 1em !important; 
+    }
+  }
+  th, td:before {
+    color: #dd5;
+  }
+}
+
+.container-listcap {
+  align-items: center;
+  justify-content: center;
+  top: 20%;
+  
 }
