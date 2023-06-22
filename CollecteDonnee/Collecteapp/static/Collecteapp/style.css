@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
 
 * {
     margin: 0;
@@ -22,7 +23,9 @@ body {
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
 }
-
+a{
+  text-decoration: none;
+}
 #navbar {
   color: #fff;
   padding: 10px;
@@ -48,7 +51,7 @@ body {
     position: fixed;
     left: 20%;
     right: 20%;
-    margin-top: 50px;
+    margin-top: 0 auto;
     text-align: center;
 
 }
@@ -58,7 +61,6 @@ body {
   align-items: center;
   justify-content: center;
   top: 20%;
-  
 }
 
 .item {
@@ -138,9 +140,14 @@ body {
   position: absolute;
   bottom: 0;
   color: #fff;
-  transform: translateY(40%);
-  transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transform: translateY(15%); 
+  transition: 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
+
+.card:hover .card-info {
+  transform: translateY(0); 
+}
+
 .card-info p {
   opacity: 0;
   text-shadow: black 0 2px 3px;
@@ -167,92 +174,105 @@ body {
 
 .card-info h1 {
   font-family: "Playfair Display";
-  font-size: 36px;
+  font-size: 12px;
   font-weight: 700;
   text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
 }
 
 
-
-
-.table {
-  margin: 1em 0;
-  min-width: 300px; 
-  
-  tr {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    display: none;
-  }
-  
-  td {
-    display: block; 
-    
-    &:first-child {
-      padding-top: .5em;
-    }
-    &:last-child {
-      padding-bottom: .5em;
-    }
-
-    &:before {
-      content: attr(data-th)": "; 
-      font-weight: bold;
-
-      width: 6.5em; 
-      display: inline-block;
-      
-      @media (min-width: breakpoint-alpha) {
-        display: none;
-      }
-    }
-  }
-  
-  th, td {
-    text-align: left;
-    
-    @media (min-width: breakpoint-alpha) {
-      display: table-cell;
-      padding: .25em .5em;
-      
-      &:first-child {
-        padding-left: 0;
-      }
-      
-      &:last-child {
-        padding-right: 0;
-      }
-    }
-
-  }
-  
-  
+table {
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
 }
-.table {
-  background: #34495E;
+
+table caption {
+  font-size: 2em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #34495E;
+  border: 1px solid #ddd;
+  padding: .35em;
+  font-size: 1.1em;
   color: #fff;
-  border-radius: .4em;
-  overflow: hidden;
-  tr {
-    border-color: lighten(#34495E, 10%);
+}
+
+table a {
+  color: red;
+  padding: 1em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  color: #dd5;
+  font-size: 1.5em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
   }
-  th, td {
-    margin: .5em 1em;
-    @media (min-width: breakpoint-alpha) { 
-      padding: 1em !important; 
-    }
+
+  table caption {
+    font-size: 1.3em;
   }
-  th, td:before {
-    color: #dd5;
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
   }
 }
 
-.container-listcap {
-  align-items: center;
-  justify-content: center;
-  top: 20%;
-  
+
+.sanstr{
+  font
 }
