@@ -180,6 +180,12 @@ a{
 }
 
 
+.btn-ajout{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 table {
   font-family: Montserrat, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -272,7 +278,3 @@ table th {
   }
 }
 
-
-.sanstr{
-  font
-}

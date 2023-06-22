@@ -53,7 +53,7 @@ def supprimer_confirm_capteur(request, di):
 
 
 
-def liste_Donnes(request):
+def liste_donnees(request):
     donnees = Donnees.objects.all()
     return render(request, 'Collecteapp/Donnees/liste_donnees.html', {'donnees': donnees})
 
@@ -66,7 +66,8 @@ def ajouter_donnees(request):
             return render(request, 'Collecteapp/confirmation.html')
     else:
         form = DonnesForm(initial={'donnees': donnees})
-    return render(request, 'Collecteapp/Donnes/ajouter_donnees.html',{'form': form, 'donnees': donnees})
+    return render(request, 'Collecteapp/Donnees/ajouter_donnees.html', {'form': form, 'donnees': donnees})
+
 
 def modifier_donnees(request, id):
     capteurs = Capteur.objects.all()
@@ -79,7 +80,7 @@ def modifier_donnees(request, id):
         form = DonnesForm(initial={'capteurs': capteurs})
     return render(request, 'Collecteapp/Donnees/modifier_donnees.html', {'form': form, 'capteurs': capteurs, 'capteurs': capteurs})
 
-def supprimer_donnes(request, id):
+def supprimer_donnees(request, id):
     donnees = models.Donnees.objects.get(pk=id)
     return render(request, "Collecteapp/Donnees/supprimer_donnees.html", {"donnees": donnees})
 
