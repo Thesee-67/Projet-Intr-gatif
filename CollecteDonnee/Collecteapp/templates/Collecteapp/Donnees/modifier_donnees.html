@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="container">
-        <h2>Modifier les Donnes du Cateur "{{ donnees.di }}"</h2>
+        <h2>Modifier les Donnes du Cateur "{{ donnees.id }}"</h2>
         <form method="post">
             {% csrf_token %}
             {{ form.heure.label_tag }}
@@ -11,8 +11,8 @@
             {{ form.jour }}
             {{ form.temps.label_tag }}
             {{ form.temps }}
-            <label for="di">Nom du Capteur:</label>
-                <select name="di" id="di" required>
+            <label for="id">Nom du Capteur:</label>
+                <select name="id" id="id" required>
                 {% for capteur in capteurs %}
                 <option value="{{ capteur.di }}">{{ capteur.di }}</option>
                 {% endfor %}

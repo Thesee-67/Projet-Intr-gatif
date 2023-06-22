@@ -42,11 +42,10 @@ def supprimer_capteur(request, di):
     capteurs = Capteur.objects.get(pk=di)
     return render(request, "Collecteapp/Capteur/supprimer_capteur.html", {"capteurs": capteurs})
 
-
-
-
-
-
+def supprimer_confirm_capteur(request, di):
+    capteurs = models.Capteur.objects.get(pk=di)
+    capteurs.delete()
+    return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteurs/")
 
 
 def liste_donnees(request):
@@ -59,7 +58,7 @@ def ajouter_donnees(request):
         form = DonnesForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'Collecteapp/confirmation.html')
+            return render(request, 'Collecteapp/Capteur/confirmation.html')
     else:
         form = DonnesForm(initial={'donnees': donnees})
     return render(request, 'Collecteapp/Donnees/ajouter_donnees.html', {'form': form, 'donnees': donnees})
@@ -79,52 +78,15 @@ def modifier_donnees(request, di):
 def supprimer_donnees(request, di):
     donnees = models.Donnees.objects.get(pk=di)
     donnees.delete()
-    return render(request, "/Collecteapp/Donnees/liste_donnees/")
+    return render(request, "/Collecteapp/Donnees/liste_donnees")
+
+def supprimer_confirm_donnees(request, id):
+    donnes = models.Capteur.objects.get(pk=id)
+    donnes.delete()
+    return HttpResponseRedirect("/Collecteapp/Donnees/liste_capteurs/")
 
 
 
 
 
-
-import paho.mqtt.client as mqtt
-from django.http import HttpResponse
-from .models import Donnees
-
-broker = "test.mosquitto.org"
-port = 1883
-topic = "IUT/Colmar2023/SAE2.04/Maison1"
-
-def parse_received_message(message):
-    data = {}
-    parts = message.split(",")
-    for part in parts:
-        key, value = part.split("=")
-        data[key.strip()] = value.strip()
-
-    # Add missing keys with default values
-    data.setdefault('heure', None)
-    data.setdefault('jour', None)
-    data.setdefault('temps', None)
-    data.setdefault('di', None)
-
-    return data
-
-def on_message(client, userdata, message):
-    received_message = str(message.payload.decode("utf-8"))
-    print("Message reçu :", received_message)
-    
-    data = parse_received_message(received_message)
-    capteur = Capteur.objects.get(di=data['di'])
-    donnees = Donnees(heure=data['heure'], jour=data['jour'], temps=data['temps'], di=capteur)
-    donnees.save()
-
-
-client = mqtt.Client()
-client.on_message = on_message
-client.connect(broker, port, 60)
-client.subscribe(topic)
-client.loop_start()
-
-def receive_message(request):
-    return HttpResponse("Message reçu !")
 

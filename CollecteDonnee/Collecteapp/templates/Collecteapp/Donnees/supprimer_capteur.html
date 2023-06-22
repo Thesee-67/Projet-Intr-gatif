@@ -1,0 +1,14 @@
+{% extends "supprimer.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>Supprimer les donnees</h2>
+        <p>Voulez-vous vraiment supprimer les donnees de la liste ?</p>
+        <form>
+            <div class="confirmation-buttons">
+                <button class="btn-supprimer"><a href="/Collecteapp/Donnees/supprimer_confirm_donnees/{{donnees.id}}/">Confirmer la suppression</a></button>
+                <a href="/Collecteapp/Donnees/liste_donnees/" class="btn-annuler">Annuler</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
