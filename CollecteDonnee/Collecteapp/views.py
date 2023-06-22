@@ -32,6 +32,7 @@ def modifier_capteur(request, di):
     if form.is_valid():
         form.save()
         return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteur")
+
     return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'form': form, 'capteurs': capteurs})
 
 
