@@ -1,38 +1,48 @@
-{% extends "Collecteapp/liste.html" %} {% block title %} Liste des Informations
-sur le Capteur {% endblock %} {% block content %}
+{% extends "Collecteapp/liste.html" %} 
+
+{% block title %} 
+Liste des Informations sur le Capteur 
+{% endblock %} 
+
+{% block content %}
 <div class="container-listcap">
   <a href="/Collecteapp/Capteur/ajouter_capteur" class="btn"
     >Ajouter un nouveau Capteur</a
   >
-  <h2>Liste des Informations sur le Capteur</h2>
-  <table class="table">
-    <tr>
-      <th>ID du Capteur</th>
-      <th>Piece</th>
-      <th>Actions</th>
-    </tr>
-
-    {% for capteur in capteurs %}
-    <tr>
-      <td>{{ capteur.di }}</td>
-      <td>{{ capteur.piece }}</td>
-      <td>
-        <form>
-          <a
-            href="/Collecteapp/Capteur/modifier_capteur/{{capteur.di}}/"
-            class="btn-modifier"
-            >Modifier</a
-          >
-          <a
-            href="/Collecteapp/Capteur/supprimer_capteur/{{capteur.di}}/"
-            class="btn-supprimer"
-            >Supprimer</a
-          >
-        </form>
-      </td>
-    </tr>
-    {% empty %}
-    <tr>
+  <table>
+    <caption>Liste des Informations sur le Capteur</caption>
+    <thead>
+      <tr>
+        <th scope="col">ID du Capteur</th>
+        <th scope="col">Piece</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for capteur in capteurs %}
+      <tr>
+        <td data-th="ID du Capteur">{{ capteur.di }}</td>
+        <td data-th="Piece">{{ capteur.piece }}</td>
+        <td data-th="Actions">
+          <form>
+            <a
+              href="/Collecteapp/Capteur/modifier_capteur/{{capteur.di}}/"
+              class="btn-modifier"
+              >Modifier</a
+            >
+            <a
+              href="/Collecteapp/Capteur/supprimer_capteur/{{capteur.di}}/"
+              class="btn-supprimer"
+              >Supprimer</a
+            >
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+    </tbody>
+  </table>
+ 
+  <tr class="sanstr">
       <td colspan="2">Aucune Information sur le Capteur enregistré.</td>
     </tr>
     {% endfor %}

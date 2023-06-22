@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from .forms import CapteurForm
 from .models import Capteur
+from .forms import DonnesForm
+from .models import Donnees
+from . import models
 from django.http import HttpResponseRedirect
 
-# Create your views here.
 
 def index(request):
     return render(request, 'Collecteapp/index.html')
@@ -45,3 +47,43 @@ def supprimer_confirm_capteur(request, di):
     capteurs = Capteur.objects.get(pk=di)
     capteurs.delete()
     return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteur/")
+
+
+
+
+
+
+def liste_Donnes(request):
+    donnees = Donnees.objects.all()
+    return render(request, 'Collecteapp/Donnees/liste_donnees.html', {'donnees': donnees})
+
+def ajouter_donnees(request):
+    donnees = Donnees.objects.all()
+    if request.method == 'POST':
+        form = DonnesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'Collecteapp/confirmation.html')
+    else:
+        form = DonnesForm(initial={'donnees': donnees})
+    return render(request, 'Collecteapp/Donnes/ajouter_donnees.html',{'form': form, 'donnees': donnees})
+
+def modifier_donnees(request, id):
+    capteurs = Capteur.objects.all()
+    donnees = models.Donnees.objects.get(pk=id)
+    form = DonnesForm(request.POST or None, instance=donnees)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect("/Collecteapp/Donnees/liste_donnees/")
+    else:
+        form = DonnesForm(initial={'capteurs': capteurs})
+    return render(request, 'Collecteapp/Donnees/modifier_donnees.html', {'form': form, 'capteurs': capteurs, 'capteurs': capteurs})
+
+def supprimer_donnes(request, id):
+    donnees = models.Donnees.objects.get(pk=id)
+    return render(request, "Collecteapp/Donnees/supprimer_donnees.html", {"donnees": donnees})
+
+def supprimer_confirm_donnees(request, id):
+    donnees = models.Donnees.objects.get(pk=id)
+    donnees.delete()
+    return HttpResponseRedirect("/Collecteapp/Donnees/liste_donnees/")

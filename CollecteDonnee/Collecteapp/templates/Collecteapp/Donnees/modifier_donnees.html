@@ -1,0 +1,24 @@
+{% extends "modifier.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>Modifier les Donnes du Cateur "{{ donnees.di }}"</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.heure.label_tag }}
+            {{ form.heure }}
+            {{ form.jour.label_tag }}
+            {{ form.jour }}
+            {{ form.temp.label_tag }}
+            {{ form.temp }}
+            <label for="di">Nom du Capteur:</label>
+                <select name="di" id="di" required>
+                {% for capteurs in capteurs %}
+                <option value="{{ capteur.di }}">{{ capteur.di }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn-modifier">Modifier</button>
+            <a href="/Collecteapp/Donnees/liste_donnees/" class="btn-annuler">Annuler</a>
+        </form>
+    </div>
+{% endblock %}

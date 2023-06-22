@@ -1,0 +1,48 @@
+{% extends "Collecteapp/liste.html" %}
+
+{% block title %}
+    Liste des Donnees du capteur
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a href="/Collecteapp/Donnees/ajouter_donnees" class="btn">Ajouter des donnes</a>
+    <h2>Liste des Donnees</h2>
+    <table>
+        <caption>Liste des Informations sur le Capteur</caption>
+        <thead>
+            <tr>
+                <th scope="col">Heure</th>
+                <th scope="col">Jour</th>
+                <th scope="col">Température</th>
+                <th scope="col">Nom du Capteur</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in film %}
+                <tr>
+                    <td data-th="Heure">{{ f.heure }}</td>
+                    <td data-th="Jour">{{ f.jour }}</td>
+                    <td data-th="Température">{{ f.temps}}</td>
+                    <td data-th="Nom du Capteur">{{ f.di }}</td>
+                    <td data-th="Actions">{{ f.actions }}</td>
+
+                    <td>
+                        <form>
+                            <button class="btn-modifier"><a
+                                href="/Cinema/Film/modifier_film/{{f.id}}/">Modifier</a></button>
+                            <button class="btn-supprimer"><a
+                                href="/Cinema/Film/supprimer_film/{{f.id}}/">Supprimer</a></button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">Aucun Film enregistré.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
