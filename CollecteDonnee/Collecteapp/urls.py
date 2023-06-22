@@ -2,8 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('index/', views.index),
-
+    path('', views.index, name='index'),
     path('Capteur/liste_capteur/', views.liste_capteurs),
     path('Capteur/ajouter_capteur', views.ajouter_capteur),
     path('Capteur/modifier_capteur/<str:di>/', views.modifier_capteur),
