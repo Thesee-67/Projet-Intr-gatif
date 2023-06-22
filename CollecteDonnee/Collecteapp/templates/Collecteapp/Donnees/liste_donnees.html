@@ -25,7 +25,12 @@
                     <td data-th="Jour">{{ f.jour }}</td>
                     <td data-th="Température">{{ f.temps}}</td>
                     <td data-th="Nom du Capteur">{{ f.di }}</td>
-                    <td data-th="Actions">{{ f.actions }}</td>
+                    <td data-th="Actions">
+                        <form>
+                          <a href="/Collecteapp/Donnees/modifier_donnees/{{f.id}}/"class="btn-modifier">Modifier</a>
+                          <a href="/Collecteapp/Donnees/supprimer_donnees/{{f.id}}/"class="btn-supprimer">Supprimer</a>
+                        </form>
+                      </td>
                 </tr>
             {% empty %}
             <tr>

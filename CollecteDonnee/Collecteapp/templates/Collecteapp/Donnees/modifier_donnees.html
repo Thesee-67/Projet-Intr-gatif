@@ -1,4 +1,4 @@
-{% extends "modifier.html" %}
+{% extends "main.html" %}
 
 {% block content %}
     <div class="container">
@@ -9,11 +9,11 @@
             {{ form.heure }}
             {{ form.jour.label_tag }}
             {{ form.jour }}
-            {{ form.temp.label_tag }}
-            {{ form.temp }}
+            {{ form.temps.label_tag }}
+            {{ form.temps }}
             <label for="di">Nom du Capteur:</label>
                 <select name="di" id="di" required>
-                {% for capteurs in capteurs %}
+                {% for capteur in capteurs %}
                 <option value="{{ capteur.di }}">{{ capteur.di }}</option>
                 {% endfor %}
             </select>
