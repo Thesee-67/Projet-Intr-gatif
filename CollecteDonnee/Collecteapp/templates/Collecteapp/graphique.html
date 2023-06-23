@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Affichage graphique des données</title>
-</head>
-<body>
+{% extends "Collecteapp/liste.html" %}
+
+{% block title %}
+    Affichage graphique des données
+{% endblock %}
+
+
+{% block content %}
     <h1>Affichage graphique des données</h1>
     <form method="POST" action="{% url 'graphique' %}">
         {% csrf_token %}
@@ -15,5 +17,5 @@
     {% if chart_image %}
         <img src="{{ graphique }}" alt="Graphique des données">
     {% endif %}
-</body>
-</html>
+{% endblock %}
+
