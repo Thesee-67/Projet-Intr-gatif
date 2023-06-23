@@ -18,7 +18,7 @@ urlpatterns = [
 
 
     path('graphique/', views.Graphique, name='graphique'),
-    path('Donnees/liste_donnees_dates/', views.liste_dates, name='liste_dates')
+    path('Donnees/liste_dates/', views.liste_dates, name='liste_dates')
 
 
 

@@ -6,6 +6,9 @@ from .models import Donnees
 from . import models
 import matplotlib.pyplot as plt
 from django.http import HttpResponseRedirect
+from datetime import datetime
+from django.core.exceptions import ValidationError
+from django.db.models import Q
 
 
 def index(request):
@@ -120,20 +123,39 @@ def Graphique(request):
     }
     return render(request, 'Collecteapp/graphique.html', context)
 
-from datetime import datetime
 
 def liste_dates(request):
     if request.method == 'POST':
-        date_str = request.POST.get('date')
-        date = datetime.strptime(date_str, '%d/%m/%Y').date()
+        date_start_str = request.POST.get('date_start')
+        heure_start_str = request.POST.get('heure_start')
+        date_end_str = request.POST.get('date_end')
+        heure_end_str = request.POST.get('heure_end')
 
-        donnees = Donnees.objects.filter(date=date)
+        if not date_start_str or not heure_start_str or not date_end_str or not heure_end_str:
+            return render(request, 'Collecteapp/Donnees/date_invalide.html')
 
-        context = {
-            'donnees': donnees,
-            'date': date,
-        }
-        return render(request, 'Collecteapp/liste_donnees.html', context)
+        try:
+            datetime_start = datetime.strptime(date_start_str + heure_start_str, '%d/%m/%Y%H:%M:%S')
+            datetime_end = datetime.strptime(date_end_str + heure_end_str, '%d/%m/%Y%H:%M:%S')
+        except ValueError:
+            return render(request, 'Collecteapp/Donnees/date_invalide.html')
 
-    return render(request, 'Collecteapp/liste_donnees.html')
+        donnees = Donnees.objects.filter(
+            Q(date__gt=datetime_start.date()) | (Q(date=datetime_start.date()) & Q(time__gte=datetime_start.time())),
+            Q(date__lt=datetime_end.date()) | (Q(date=datetime_end.date()) & Q(time__lte=datetime_end.time()))
+        )
+
+        if donnees:
+            context = {
+                'donnees': donnees,
+                'datetime_start': datetime_start,
+                'datetime_end': datetime_end,
+            }
+            return render(request, 'Collecteapp/Donnees/liste_donnees_date.html', context)
+        else:
+            return render(request, 'Collecteapp/Donnees/retour.html')
+
+    return render(request, 'Collecteapp/Donnees/liste_donnees_date.html')
+
+
 
