@@ -8,25 +8,33 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" type="text/css" href="{% static 'Collecteapp/style.css' %}">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 </head>
 <body>
     <h1 style="color: white; text-align: center; font-weight: bold; font-size: 48px; margin-top: 3%; margin-bottom: 3%;">Interface de la Récupération de Donnees</h1>
 
-    <div id="navbar">
-        <ul><h2>
-            <li><a href="/Collecteapp/">Menu</a>
-            <li><a href="/Collecteapp/Capteur/liste_capteur">Liste Capteur</a>
-            <li><a href="/Collecteapp/Donnees/liste_donnees">Liste Données</a>
-            <li><a href="/Collecteapp/graphique/">Graphique</a> 
-            </h2>
-        </ul>
-    </div>
+    <div class="overlay-navigation">
+        <nav role="navigation">
+          <ul>
+            <li><a href="/Collecteapp/" data-content="Le Début">Menu</a></li>
+            <li><a href="/Collecteapp/Capteur/liste_capteur" data-content="Les capteurs">Liste Capteur</a></li>
+            <li><a href="/Collecteapp/Donnees/liste_donnees" data-content="Les Donnéess">Liste Données</a></li>
+            <li><a href="/Collecteapp/graphique/" data-content="Le Graphique">Graphique</a></li>
+            <li><a href="#" data-content="Contactez-nous">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <section class="home">
+        <div class="open-overlay">
+          <span class="bar-top"></span>
+          <span class="bar-middle"></span>
+          <span class="bar-bottom"></span>
+        </div>
+      </section>
 
 
 
     {% block content %}
-    <h1 class="title">Menu</h1>
     <div class="container">
         <a href="/Collecteapp/Capteur/ajouter_capteur" class="card-wrap">
         <div class="card">
@@ -52,10 +60,7 @@
     {% block content2 %}
     {% endblock %}
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script  src="{% static 'Collecteapp/script.js' %}"></script>
 </body>
 </html>
