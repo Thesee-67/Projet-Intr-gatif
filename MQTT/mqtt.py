@@ -6,6 +6,8 @@ broker = "test.mosquitto.org"
 port = 1883
 topic = "IUT/Colmar2023/SAE2.04/Maison1"
 
+
+
 # Fonction de rappel pour la connexion au broker MQTT
 def on_connect(client, userdata, flags, rc):
     print("Connecté au broker MQTT")

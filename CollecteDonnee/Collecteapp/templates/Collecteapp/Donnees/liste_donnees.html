@@ -21,10 +21,10 @@
         <tbody>
             {% for donnes in donnees %}
                 <tr>
-                    <td>{{ donnes.heure }}</td>
-                    <td>{{ donnees.jour }}</td>
-                    <td>{{ donnees.temps }}</td>
-                    <td>{{ donnees.capteur }}</td>
+                    <td>{{ donnes.date }}</td>
+                    <td>{{ donnes.time }}</td>
+                    <td>{{ donnes.temps }}</td>
+                    <td>{{ donnes.id_capteur }}</td>
                     <td>
                         <form>
                           <a href="/Collecteapp/Donnees/modifier_donnees/{{donnes.id}}/"class="btn-modifier">Modifier</a>

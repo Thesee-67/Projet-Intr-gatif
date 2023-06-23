@@ -27,8 +27,8 @@ def ajouter_capteur(request):
     return render(request, 'Collecteapp/Capteur/ajouter_capteur.html',{'form': form})
 
 # Only for prod
-def modifier_capteur(request, di):
-    capteurs = Capteur.objects.get(pk=di)
+def modifier_capteur(request, id_capteur):
+    capteurs = Capteur.objects.get(pk=id_capteur)
     form = CapteurForm(request.POST or None, instance=capteurs)
     if form.is_valid():
         form.save()
@@ -37,12 +37,12 @@ def modifier_capteur(request, di):
     return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'form': form, 'capteurs': capteurs})
 
 
-def supprimer_capteur(request, di):
-    capteurs = Capteur.objects.get(pk=di)
+def supprimer_capteur(request, id_capteur):
+    capteurs = Capteur.objects.get(pk=id_capteur)
     return render(request, "Collecteapp/Capteur/supprimer_capteur.html", {"capteurs": capteurs})
 
-def supprimer_confirm_capteur(request, di):
-    capteurs = Capteur.objects.get(pk=di)
+def supprimer_confirm_capteur(request, id_capteur):
+    capteurs = Capteur.objects.get(pk=id_capteur)
     capteurs.delete()
     return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteur/")
 
@@ -56,7 +56,7 @@ def ajouter_donnees(request):
         form = DonnesForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'Collecteapp/Donnees/confirmation.html')
+            return render(request, 'Collecteapp/Donnees/confirmation_donnees.html')
     else:
         form = DonnesForm(initial={'capteurs': capteurs})
     return render(request, 'Collecteapp/Donnees/ajouter_donnees.html', {'form': form, 'capteurs': capteurs})
@@ -68,16 +68,16 @@ def modifier_donnees(request, id):
         form = DonnesForm(request.POST, instance=donnees)
         if form.is_valid():
             form.save()
-            return redirect('liste_donnees')
+            return HttpResponseRedirect('/Donnees/liste_donnees/')
     else:
         form = DonnesForm(instance=donnees, initial={'capteurs': capteurs})
     return render(request, 'Collecteapp/Donnees/modifier_donnees.html', {'form': form, 'capteurs': capteurs, 'donnees': donnees})
 
 def supprimer_donnees(request, id):
-    donnees = Donnees.objects.get(pk=id)
+    donnees = models.Donnees.objects.get(pk=id)
     return render(request,"Collecteapp/Donnees/supprimer_donnees.html", {"donnees": donnees})
 
 def supprimer_confirm_donnees(request, id):
-    donnees = Donnees.objects.get(pk=id)
+    donnees = models.Donnees.objects.get(pk=id)
     donnees.delete()
-    return HttpResponseRedirect("Collecteapp/Donnees/liste_donnees/")
+    return HttpResponseRedirect("/Collecteapp/Donnees/liste_donnees/")

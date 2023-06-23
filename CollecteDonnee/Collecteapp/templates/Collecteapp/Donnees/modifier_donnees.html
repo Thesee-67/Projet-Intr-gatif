@@ -2,20 +2,19 @@
 
 {% block content %}
     <div class="container">
-        <h2>Modifier les Donnes du Cateur "{{ donnees.id }}"</h2>
+        <h2>Modifier les Donnes du Capteur "{{ donnees.id }}"</h2>
         <form method="post">
             {% csrf_token %}
-            {{ form.heure.label_tag }}
-            {{ form.heure }}
-            {{ form.jour.label_tag }}
-            {{ form.jour }}
+            <div class="form-group">
+                <label for="date">Date de Sortie:</label>
+                <input type="date" name="date" id="date" required>
+            </div>
+            {{ form.time.label_tag }}
+            {{ form.time }}
             {{ form.temps.label_tag }}
             {{ form.temps }}
-            <label for="id">Nom du Capteur:</label>
-                <select name="id" id="id" required>
-                {% for capteur in capteurs %}
-                <option value="{{ capteur.di }}">{{ capteur.di }}</option>
-                {% endfor %}
+            {{ form.id_capteur.label_tag }}
+            {{ form.id_capteur }}
             </select>
             <button type="submit" class="btn-modifier">Modifier</button>
             <a href="/Collecteapp/Donnees/liste_donnees/" class="btn-annuler">Annuler</a>

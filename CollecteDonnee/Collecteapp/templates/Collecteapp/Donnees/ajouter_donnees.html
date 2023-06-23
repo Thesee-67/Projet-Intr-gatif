@@ -11,12 +11,12 @@ Ajouter un nouveau Donnees
 {% block form %}
     {% csrf_token %}
     <div class="form-group">
-        <label for="jour">Jour :</label>
-        {{ form.jour }}
+        <label for="date">Date de Sortie:</label>
+        <input type="date" name="date" id="date" required>
     </div>
     <div class="form-group">
         <label for="heure">Heure:</label>
-        {{ form.heure }}
+        {{ form.time }}
     </div>
     <div class="form-group">
         <label for="temps">Température :</label>
@@ -24,7 +24,7 @@ Ajouter un nouveau Donnees
     </div>
     <div class="form-group">
         <label for="capteur">ID du Capteur:</label>
-        {{ form.capteur }}
+        {{ form.id_capteur }}
         </div>
 {% endblock %}
 

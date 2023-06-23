@@ -21,17 +21,17 @@ Liste des Informations sur le Capteur
     <tbody>
       {% for capteur in capteurs %}
       <tr>
-        <td data-th="ID du Capteur">{{ capteur.di }}</td>
+        <td data-th="ID du Capteur">{{ capteur.id_capteur }}</td>
         <td data-th="Piece">{{ capteur.piece }}</td>
         <td data-th="Actions">
           <form>
             <a
-              href="/Collecteapp/Capteur/modifier_capteur/{{ capteur.di }}/"
+              href="/Collecteapp/Capteur/modifier_capteur/{{ capteur.id_capteur }}/"
               class="btn-modifier"
               >Modifier</a
             >
             <a
-              href="/Collecteapp/Capteur/supprimer_capteur/{{ capteur.di }}/"
+              href="/Collecteapp/Capteur/supprimer_capteur/{{ capteur.id_capteur }}/"
               class="btn-supprimer"
               >Supprimer</a
             >
