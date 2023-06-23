@@ -19,15 +19,10 @@
         <button type="submit">Afficher les données</button>
     </form>
 
-    {% if donnees %}
         <h2>Données pour la période : {{ datetime_start|date:'d/m/Y H:i:s' }} - {{ datetime_end|date:'d/m/Y H:i:s' }}</h2>
         <ul>
             {% for donnee in donnees %}
                 <li>ID Capteur: {{ donnee.id_capteur.id_capteur }} - Date: {{ donnee.date }} - Heure: {{ donnee.time }} - Température: {{ donnee.temps }}</li>
             {% endfor %}
         </ul>
-    {% else %}
-        <h2>Pas de données disponibles</h2>
-        <p>Il n'y a pas d'informations disponibles pour cette période.</p>
-    {% endif %}
 {% endblock %}

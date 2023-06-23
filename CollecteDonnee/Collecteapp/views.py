@@ -7,7 +7,6 @@ from . import models
 import matplotlib.pyplot as plt
 from django.http import HttpResponseRedirect
 from datetime import datetime
-from django.core.exceptions import ValidationError
 from django.db.models import Q
 
 
