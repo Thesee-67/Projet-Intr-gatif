@@ -5,8 +5,6 @@
         <h2>Modifier le Informations du Capteur"{{ capteurs.id_capteur }}"</h2>
         <form method="post">
             {% csrf_token %}
-            {{ form.id_capteur.label_tag }}
-            {{ form.id_capteur }}
             {{ form.piece.label_tag }}
             {{ form.piece }}
             <button type="submit" class="btn-modifier">Modifier</button>

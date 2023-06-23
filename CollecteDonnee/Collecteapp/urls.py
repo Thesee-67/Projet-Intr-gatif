@@ -17,5 +17,10 @@ urlpatterns = [
     path('Donnees/supprimer_confirm_donnees/<str:id>/', views.supprimer_confirm_donnees),
 
 
+    path('graphique/', views.Graphique, name='graphique'),
+    path('Donnees/liste_donnees_dates/', views.liste_dates, name='liste_dates')
+
+
+
     #path('receive_message/', views.receive_message, name='receive_message'),
 ]

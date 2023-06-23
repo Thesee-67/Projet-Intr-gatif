@@ -4,6 +4,7 @@ from .models import Capteur
 from .forms import DonnesForm
 from .models import Donnees
 from . import models
+import matplotlib.pyplot as plt
 from django.http import HttpResponseRedirect
 
 
@@ -81,3 +82,58 @@ def supprimer_confirm_donnees(request, id):
     donnees = models.Donnees.objects.get(pk=id)
     donnees.delete()
     return HttpResponseRedirect("/Collecteapp/Donnees/liste_donnees/")
+
+def Graphique(request):
+    form = DonnesForm()
+
+    if request.method == 'POST':
+        form = DonnesForm(request.POST)
+        if form.is_valid():
+            id_capteur = form.cleaned_data['id_capteur']
+
+            # Récupérer les données du capteur depuis la base de données
+            donnees = Donnees.objects.filter(id_capteur=id_capteur)
+
+            # Préparer les données pour le graphique
+            labels = [str(donnee.date) for donnee in donnees]
+            temps = [donnee.temps for donnee in donnees]
+
+            # Créer un graphique
+            plt.plot(labels, temps)
+            plt.title('Graphique des données')
+            plt.xlabel('Date')
+            plt.ylabel('Temps')
+
+            # Convertir le graphique en image
+            image_path = '/static/image/graphique.png'  # Chemin vers l'image
+            plt.savefig(image_path)
+
+            # Renvoyer les données au template
+            context = {
+                'form': form,
+                'chart_image': image_path,
+            }
+            return render(request, 'Collecteapp/graphique.html', context)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'Collecteapp/graphique.html', context)
+
+from datetime import datetime
+
+def liste_dates(request):
+    if request.method == 'POST':
+        date_str = request.POST.get('date')
+        date = datetime.strptime(date_str, '%d/%m/%Y').date()
+
+        donnees = Donnees.objects.filter(date=date)
+
+        context = {
+            'donnees': donnees,
+            'date': date,
+        }
+        return render(request, 'Collecteapp/liste_donnees.html', context)
+
+    return render(request, 'Collecteapp/liste_donnees.html')
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des données</title>
+</head>
+<body>
+    <h1>Liste des données</h1>
+    <form method="POST" action="{% url 'liste_dates' %}">
+        {% csrf_token %}
+        <input type="text" name="date" placeholder="jj/mm/aaaa" required>
+        <button type="submit">Afficher les données</button>
+    </form>
+
+    {% if donnees %}
+        <h2>Données pour la date : {{ date }}</h2>
+        <ul>
+            {% for donnee in donnees %}
+                <li>{{ donnee }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
