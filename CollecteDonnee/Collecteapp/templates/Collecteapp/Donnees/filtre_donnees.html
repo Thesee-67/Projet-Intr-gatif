@@ -1,0 +1,34 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <h1>Liste des données filtrées</h1>
+    <form method="POST" action="{% url 'filtrer_donnees' %}">
+        {% csrf_token %}
+        <label for="date_start">Date de début :</label>
+        <input type="text" name="date_start" placeholder="jj/mm/aaaa" required>
+        <label for="heure_start">Heure de début :</label>
+        <input type="text" name="heure_start" placeholder="hh:mm:ss" required>
+        <label for="date_end">Date de fin :</label>
+        <input type="text" name="date_end" placeholder="jj/mm/aaaa" required>
+        <label for="heure_end">Heure de fin :</label>
+        <input type="text" name="heure_end" placeholder="hh:mm:ss" required>
+        
+        <label for="id_capteur">Capteur :</label>
+        <select name="id_capteur">
+            {% for capteur in capteurs %}
+                <option value="{{ capteur.id_capteur }}">{{ capteur.id_capteur }}</option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Filtrer les données</button>
+    </form>
+
+    <h2>Données pour la période : {{ datetime_start|date:'d/m/Y H:i:s' }} - {{ datetime_end|date:'d/m/Y H:i:s' }}</h2>
+    <h2>Capteur sélectionné : {{ capteur.id_capteur }}</h2>
+    
+    <ul>
+        {% for donnee in donnees %}
+            <li>ID Capteur: {{ donnee.id_capteur.id_capteur }} - Date: {{ donnee.date }} - Heure: {{ donnee.time }} - Température: {{ donnee.temps }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

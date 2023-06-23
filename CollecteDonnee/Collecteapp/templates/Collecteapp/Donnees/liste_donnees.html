@@ -5,9 +5,20 @@
 {% endblock %}
 
 {% block content %}
+<script>
+    // Fonction pour rafraîchir la page
+    function rafraichirPage() {
+        location.reload(); // Rafraîchit la page actuelle
+    }
+
+    // Rafraîchir la page toutes les 5 secondes (5000 millisecondes)
+    setInterval(rafraichirPage, 5000);
+</script>
 <div class="container-listcap">
     <a href="/Collecteapp/Donnees/ajouter_donnees/" class="btn-ajout">Ajouter des données</a>
-    <a href="/Collecteapp/Donnees/liste_dates/" class="btn-ajout">Voir les Données en fonction du Jour</a>
+    <a href="/Collecteapp/Donnees/liste_dates/" class="btn-ajout">Filtre par Date et Heure</a>
+    <a href="/Collecteapp/Donnees/filtre_capteur/" class="btn-ajout">Filtre par Capteur</a>
+    <a href="/Collecteapp/Donnees/filtre_donnees/" class="btn-ajout">Filtre les Donnees</a>
     <table>
         <caption>Liste des Donnees</caption>
         <thead>

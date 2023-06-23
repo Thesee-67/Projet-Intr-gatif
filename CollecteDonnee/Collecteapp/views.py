@@ -158,3 +158,87 @@ def liste_dates(request):
 
 
 
+def filtrer_par_capteur(request):
+    capteurs = Capteur.objects.all()
+
+    if request.method == 'POST':
+        id_capteur = request.POST.get('id_capteur')
+
+        if not id_capteur:
+            return render(request, 'Collecteapp/Donnees/filtre_capteur.html', {'erreur': 'Veuillez choisir un capteur à filtrer.'})
+
+        try:
+            capteur = Capteur.objects.get(id_capteur=id_capteur)
+        except Capteur.DoesNotExist:
+            return render(request, 'Collecteapp/Donnees/filtre_capteur.html', {'erreur': 'Le capteur spécifié n\'existe pas.'})
+
+        donnees = Donnees.objects.filter(id_capteur=capteur)
+
+        context = {
+            'donnees': donnees,
+            'capteur': capteur,
+            'capteurs': capteurs
+        }
+
+        return render(request, 'Collecteapp/Donnees/filtre_capteur.html', context)
+
+    context = {
+        'capteurs': capteurs
+    }
+
+    return render(request, 'Collecteapp/Donnees/filtre_capteur.html', context)
+
+def filtrer_donnees(request):
+    capteurs = Capteur.objects.all()
+
+    if request.method == 'POST':
+        date_start_str = request.POST.get('date_start')
+        heure_start_str = request.POST.get('heure_start')
+        date_end_str = request.POST.get('date_end')
+        heure_end_str = request.POST.get('heure_end')
+        id_capteur = request.POST.get('id_capteur')
+
+        if not date_start_str or not heure_start_str or not date_end_str or not heure_end_str:
+            return render(request, 'Collecteapp/Donnees/date_invalide.html')
+
+        if not id_capteur:
+            return render(request, 'Collecteapp/Donnees/filtre_capteur.html', {'erreur': 'Veuillez choisir un capteur à filtrer.'})
+
+        try:
+            datetime_start = datetime.strptime(date_start_str + heure_start_str, '%d/%m/%Y%H:%M:%S')
+            datetime_end = datetime.strptime(date_end_str + heure_end_str, '%d/%m/%Y%H:%M:%S')
+        except ValueError:
+            return render(request, 'Collecteapp/Donnees/date_invalide.html')
+
+        try:
+            capteur = Capteur.objects.get(id_capteur=id_capteur)
+        except Capteur.DoesNotExist:
+            return render(request, 'Collecteapp/Donnees/filtre_capteur.html', {'erreur': 'Le capteur spécifié n\'existe pas.'})
+
+        donnees = Donnees.objects.filter(
+            Q(date__gt=datetime_start.date()) | (Q(date=datetime_start.date()) & Q(time__gte=datetime_start.time())),
+            Q(date__lt=datetime_end.date()) | (Q(date=datetime_end.date()) & Q(time__lte=datetime_end.time())),
+            id_capteur=capteur
+        )
+
+        if donnees:
+            context = {
+                'donnees': donnees,
+                'datetime_start': datetime_start,
+                'datetime_end': datetime_end,
+                'capteur': capteur,
+                'capteurs': capteurs
+            }
+            return render(request, 'Collecteapp/Donnees/filtre_donnees.html', context)
+        else:
+            return render(request, 'Collecteapp/Donnees/retour.html')
+
+    context = {
+        'capteurs': capteurs
+    }
+
+    return render(request, 'Collecteapp/Donnees/filtre_donnees.html', context)
+
+
+
+

@@ -18,7 +18,9 @@ urlpatterns = [
 
 
     path('graphique/', views.Graphique, name='graphique'),
-    path('Donnees/liste_dates/', views.liste_dates, name='liste_dates')
+    path('Donnees/liste_dates/', views.liste_dates, name='liste_dates'),
+    path('Donnees/filtre_capteur/', views.filtrer_par_capteur, name='filtrer_par_capteur'),
+     path('Donnees/filtre_donnees/', views.filtrer_donnees, name='filtrer_donnees'),
 
 
 
