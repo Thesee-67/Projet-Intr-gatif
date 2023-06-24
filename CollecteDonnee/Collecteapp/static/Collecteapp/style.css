@@ -1,7 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
-@import url(https://fonts.googleapis.com/css?family=Work+Sans:400,300,700|Open+Sans:400italic,300italic);
-@import "https://fonts.googleapis.com/css2?family=Megrim&display=swap";
 
 /* ====================================
 main
@@ -20,13 +18,13 @@ html {
   }
 
 body {
-    font-family: montserrat, arial, verdana;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
     margin: 0 2%; 
     padding: 0;
-    font-family: "Raleway";
     font-size: 14px;
     font-weight: 500;
-    -webkit-font-smoothing: antialiased;
 }
 a{
   text-decoration: none;

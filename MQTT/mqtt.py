@@ -63,11 +63,11 @@ def on_message(client, userdata, msg):
             return
         
         # Insertion des données dans la table "details"
-        sql_query_details = "INSERT IGNORE INTO capteur (id_capteur, piece) VALUES (%s, %s) ON DUPLICATE KEY UPDATE PIECE=VALUES(PIECE)"
+        sql_query_details = "INSERT IGNORE INTO Capteur (id_capteur, piece) VALUES (%s, %s) ON DUPLICATE KEY UPDATE PIECE=VALUES(PIECE)"
         cursor.execute(sql_query_details, (values.get("Id"), values.get("piece")))
         db_connection.commit()
 
-        sql_query_details = "INSERT INTO donnees (id_capteur_id, date, time, temps) VALUES (%s, %s, %s, %s)"
+        sql_query_details = "INSERT INTO Donnees (id_capteur_id, date, time, temps) VALUES (%s, %s, %s, %s)"
         cursor.execute(sql_query_details, (values.get("Id"),date_en, values.get("time"), values.get("temp")))
         db_connection.commit()
 
