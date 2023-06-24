@@ -380,10 +380,10 @@ nav li a:hover:after {
 }
 
 nav li:nth-of-type(1){background-color: #29363B}
-nav li:nth-of-type(2){background-color: #EA495F}
-nav li:nth-of-type(3){background-color: #F4837D}
-nav li:nth-of-type(4){background-color: #FDCEA9}
-nav li:nth-of-type(5){background-color: #99B998}
+nav li:nth-of-type(2){background-color: #875e64}
+nav li:nth-of-type(3){background-color: #bd6a65}
+nav li:nth-of-type(4){background-color: #c59c7c}
+nav li:nth-of-type(5){background-color: #748e73}
 
 .slide-in-nav-item {
   animation: slide-in-nav-item 0.4s linear 1 .2s both;
