@@ -1,6 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
 @import url(https://fonts.googleapis.com/css?family=Work+Sans:400,300,700|Open+Sans:400italic,300italic);
+@import "https://fonts.googleapis.com/css2?family=Megrim&display=swap";
+
+/* ====================================
+main
+==================================== */
 * {
     margin: 0;
     padding: 0;
@@ -26,34 +31,14 @@ body {
 a{
   text-decoration: none;
 }
-#navbar {
-  color: #fff;
-  padding: 10px;
-  text-align: center; /* +++mid */
+
+.titreprinci {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 48px;
+  margin-top: 3%;
   margin-bottom: 3%;
-}
-
-#navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-#navbar ul li {
-  display: inline;
-  margin-right: 10px;
-}
-
-.Title{
-    font-size: 50px;
-    font-weight: bold;
-    color: white;
-    position: fixed;
-    left: 20%;
-    right: 20%;
-    margin-top: 0 auto;
-    text-align: center;
-
 }
 
 .container {
@@ -66,6 +51,10 @@ a{
 .item {
   width: 10em;
 }
+
+/* ====================================
+cartes 
+==================================== */
 
 .box {
   width: calc(60% - 5%); 
@@ -179,12 +168,20 @@ a{
   text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
 }
 
+/* ====================================
+bouton ajout
+==================================== */
+
 
 .btn-ajout{
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+/* ====================================
+tables
+==================================== */
 
 table {
   font-family: Montserrat, sans-serif;
