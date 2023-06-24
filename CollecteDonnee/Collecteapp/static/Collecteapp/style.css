@@ -15,6 +15,9 @@ html {
       rgba(4, 99, 128, 0.6),
       rgba(220, 180, 2, 0.6)
     );
+    padding-left: 5%;
+    padding-right: 5%;
+
   }
 
 body {
@@ -22,7 +25,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
     margin: 0 2%; 
-    padding: 0;
     font-size: 14px;
     font-weight: 500;
 }
