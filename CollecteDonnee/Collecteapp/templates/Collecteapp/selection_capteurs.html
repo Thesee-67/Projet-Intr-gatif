@@ -1,7 +1,12 @@
-<!DOCTYPE html>
-<html>
+{% extends "main.html" %}
+
+{% block title %}
+    Sélection du Capteur
+{% endblock %}
+
+{% block content %}
 <head>
-    <title>Graphique en temps réel</title>
+    <title>Sélection du Capteur</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -15,4 +20,4 @@
         <button type="submit">Afficher le graphique</button>
     </form>
 </body>
-</html>
+{% endblock %}
