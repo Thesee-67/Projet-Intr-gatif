@@ -25,5 +25,6 @@ urlpatterns = [
     path('Donnees/supprimer_confirm_toutes_donnees/', views.supprimer_confirm_toutes_donnees),
     path('capteurs/', views.selection_capteurs, name='selection_capteurs'),
     path('graphique/', views.graphique, name='graphique'),
+    path('contact/', views.contact, name='contact'),
     #path('receive_message/', views.receive_message, name='receive_message'),
 ]

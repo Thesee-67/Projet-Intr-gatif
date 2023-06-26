@@ -4,6 +4,10 @@
     <style>
         body, html {
             height: 100%;
+            background: linear-gradient(
+            rgba(4, 99, 128, 0.6),
+            rgba(220, 180, 2, 0.6)
+            );
             margin: 0;
             padding: 0;
         }
@@ -19,6 +23,35 @@
             max-width: 800px;
             max-height: 100%;
         }
+
+        /* Ajout du style pour la légende */
+        .chart-legend {
+            color: black;
+        }
+
+        /* Ajout du style pour le cadrillage */
+        .chart-grid-line {
+            stroke: black;
+        }
+
+        /* Ajout du style pour les valeurs du graphique */
+        .chart-data-sets .chart-data-set .chart-line .chart-point {
+            background-color: black;
+        }
+
+        /* Ajout du style pour le bouton */
+        #menu-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
     </style>
     <title>Graphique en temps réel</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -27,6 +60,10 @@
     <div id="graphique-container">
         <canvas id="graphique"></canvas>
     </div>
+
+    <!-- Ajout du bouton -->
+    <button id="menu-button" onclick="retournerAuMenu()">Retourner au menu</button>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const ctx = document.getElementById('graphique').getContext('2d');
@@ -65,15 +102,40 @@
                                 display: true,
                                 title: {
                                     display: true,
-                                    text: 'Heure'
+                                    text: 'Heure',
+                                    color: 'black' // Couleur du titre de l'axe x
+                                },
+                                ticks: {
+                                    color: 'black' // Couleur des valeurs de l'axe x
+                                },
+                                grid: {
+                                    color: 'black' // Couleur du cadrillage de l'axe x
                                 }
                             },
                             y: {
                                 display: true,
                                 title: {
                                     display: true,
-                                    text: 'Température'
+                                    text: 'Température',
+                                    color: 'black' // Couleur du titre de l'axe y
+                                },
+                                ticks: {
+                                    color: 'black' // Couleur des valeurs de l'axe y
+                                },
+                                grid: {
+                                    color: 'black' // Couleur du cadrillage de l'axe y
                                 }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'black' // Couleur de la légende
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false
                             }
                         }
                     }
@@ -106,6 +168,11 @@
             // Mettre à jour les données du graphique toutes les 5 secondes
             setInterval(mettreAJourGraphique, 5000);
         });
+
+        // Fonction pour retourner au menu
+        function retournerAuMenu() {
+            window.location.href = "/Collecteapp/";
+        }
     </script>
 </body>
 </html>

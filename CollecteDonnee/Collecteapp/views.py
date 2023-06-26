@@ -254,5 +254,8 @@ def graphique(request):
 
     return render(request, 'Collecteapp/graphique.html', context)
 
+def contact(request):
+    return render(request, 'Collecteapp/contact.html')
+
 
 
