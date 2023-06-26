@@ -1,23 +1,23 @@
 {% extends "main.html" %}
 
 {% block content %}
-    <div class="container">
-        <h2>Modifier les Donnes du Capteur "{{ donnees.id }}"</h2>
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="date">Date de Sortie:</label>
-                <input type="date" name="date" id="date" required>
-            </div>
-            {{ form.time.label_tag }}
-            {{ form.time }}
-            {{ form.temps.label_tag }}
-            {{ form.temps }}
-            {{ form.id_capteur.label_tag }}
-            {{ form.id_capteur }}
-            </select>
-            <button type="submit" class="btn-modifier">Modifier</button>
-            <a href="/Collecteapp/Donnees/liste_donnees/" class="btn-annuler">Annuler</a>
-        </form>
-    </div>
+    <form id="msform" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+          <h2 class="fs-title">Modifier les Donnes du Capteur "{{ donnees.id }}"</h2>
+          <div class="form-group">
+            <label for="date">Date de Sortie:</label>
+            <input type="date" name="date" id="date" required>
+        </div>
+        {{ form.time.label_tag }}
+        {{ form.time }}
+        {{ form.temps.label_tag }}
+        {{ form.temps }}
+        {{ form.id_capteur.label_tag }}
+        {{ form.id_capteur }}
+        <br><br>
+        <button type="submit" class="btn-i">Modifier</button>
+        <a href="/Collecteapp/Donnees/liste_donnees/" class="btn-ii"><button="submit" class="btn-ii">Annuler</button></a>
+    </fieldset>
+      </form>
 {% endblock %}

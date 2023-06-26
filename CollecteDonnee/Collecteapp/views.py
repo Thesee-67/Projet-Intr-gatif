@@ -12,6 +12,8 @@ import io
 import json
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+import csv
 
 
 
@@ -205,5 +207,52 @@ def filtrer_donnees(request):
     }
 
     return render(request, 'Collecteapp/Donnees/filtre_donnees.html', context)
+
+def generate_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="data.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Colonne1', 'Colonne2', 'Colonne3', 'Colonne4'])
+
+    data = Donnees.objects.all()
+    for item in data:
+        writer.writerow([item.id_capteur, item.date, item.time,item.temps])
+
+    return response
+
+def supprimer_toutes_donnees(request):
+    donnees = Donnees.objects.all
+    return render(request,"Collecteapp/Donnees/supprimer_tout.html", {"donnees": donnees})
+
+def supprimer_confirm_toutes_donnees(request):
+    Donnees.objects.all().delete()
+    return HttpResponseRedirect("/Collecteapp/Donnees/liste_donnees/")
+
+def selection_capteurs(request):
+    capteurs = Capteur.objects.all()
+    context = {
+        'capteurs': capteurs
+    }
+    return render(request, 'Collecteapp/selection_capteurs.html', context)
+
+def graphique(request):
+    capteur_id = request.GET.get('capteur')
+    capteur = Capteur.objects.get(id_capteur=capteur_id)
+    donnees = Donnees.objects.filter(id_capteur=capteur_id)
+
+    dates = [str(donnee.date) for donnee in donnees]
+    heures = [str(donnee.time) for donnee in donnees]
+    temperatures = [donnee.temps for donnee in donnees]
+
+    context = {
+        'capteur': capteur,
+        'dates': json.dumps(dates),
+        'heures': json.dumps(heures),
+        'temperatures': json.dumps(temperatures),
+    }
+
+    return render(request, 'Collecteapp/graphique.html', context)
+
 
 

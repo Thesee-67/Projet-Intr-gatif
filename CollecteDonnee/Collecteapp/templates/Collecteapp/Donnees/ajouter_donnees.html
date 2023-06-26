@@ -4,27 +4,30 @@
 Ajouter un nouveau Donnees
 {% endblock %}
 
-{% block subtitle %}
-<h2> Ajouter un nouveau Donnees </h2>
-{% endblock %}
-
-{% block form %}
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="date">Date de Sortie:</label>
-        <input type="date" name="date" id="date" required>
-    </div>
-    <div class="form-group">
-        <label for="heure">Heure:</label>
-        {{ form.time }}
-    </div>
-    <div class="form-group">
-        <label for="temps">Température :</label>
-        {{ form.temps }}
-    </div>
-    <div class="form-group">
-        <label for="capteur">ID du Capteur:</label>
-        {{ form.id_capteur }}
-        </div>
+{% block content %}
+        <form id="msform" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+              <h2 class="fs-title">Ajouter un nouveau Donnees</h2>
+              <div class="form-group">
+                <label for="date">Date de Sortie:</label>
+                <input type="date" name="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="heure">Heure:</label>
+                {{ form.time }}
+            </div>
+            <div class="form-group">
+                <label for="temps">Température :</label>
+                {{ form.temps }}
+            </div>
+            <div class="form-group">
+                <label for="capteur">ID du Capteur:</label>
+                {{ form.id_capteur }}
+                </div>
+                <br><br>
+            <input type="submit" value="Ajouter"\>
+            </fieldset>
+          </form>
 {% endblock %}
 

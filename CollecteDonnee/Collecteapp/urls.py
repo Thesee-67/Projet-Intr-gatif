@@ -20,7 +20,10 @@ urlpatterns = [
     path('Donnees/liste_dates/', views.liste_dates, name='liste_dates'),
     path('Donnees/filtre_capteur/', views.filtrer_par_capteur, name='filtrer_par_capteur'),
     path('Donnees/filtre_donnees/', views.filtrer_donnees, name='filtrer_donnees'),
-
-
+    path('Donnees/csv/', views.generate_csv, name='generate_csv'),
+    path('Donnees/supprimer_toutes_donnees/', views.supprimer_toutes_donnees),
+    path('Donnees/supprimer_confirm_toutes_donnees/', views.supprimer_confirm_toutes_donnees),
+    path('capteurs/', views.selection_capteurs, name='selection_capteurs'),
+    path('graphique/', views.graphique, name='graphique'),
     #path('receive_message/', views.receive_message, name='receive_message'),
 ]

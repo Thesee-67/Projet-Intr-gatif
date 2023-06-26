@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #graphique-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        canvas {
+            max-width: 800px;
+            max-height: 100%;
+        }
+    </style>
+    <title>Graphique en temps réel</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="graphique-container">
+        <canvas id="graphique"></canvas>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('graphique').getContext('2d');
+            let graphique;
+
+            // Récupérer les données du contexte Django
+            const dates = JSON.parse('{{ dates|safe }}');
+            const heures = JSON.parse('{{ heures|safe }}');
+            const temperatures = JSON.parse('{{ temperatures|safe }}');
+
+            // Filtrer les dix dernières valeurs
+            const dernieresDates = dates.slice(-10);
+            const dernieresHeures = heures.slice(-10);
+            const dernieresTemperatures = temperatures.slice(-10);
+
+            // Initialiser le graphique avec les données filtrées
+            function initialiserGraphique() {
+                graphique = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dernieresHeures,
+                        datasets: [{
+                            label: 'Température',
+                            data: dernieresTemperatures,
+                            fill: false,
+                            borderColor: 'blue',
+                            tension: 0.1,
+                            showLine: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: 'Heure'
+                                }
+                            },
+                            y: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: 'Température'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Mettre à jour les données du graphique
+            function mettreAJourGraphique() {
+                // Effectuer une requête AJAX pour récupérer les nouvelles données depuis le serveur
+                fetch('/api/donnees-en-temps-reel/')
+                    .then(response => response.json())
+                    .then(data => {
+                        const nouvellesDates = data.map(entry => entry.date);
+                        const nouvellesHeures = data.map(entry => entry.heure);
+                        const nouvellesTemperatures = data.map(entry => entry.temps);
+
+                        // Mettre à jour les labels et les données du graphique
+                        graphique.data.labels = nouvellesHeures;
+                        graphique.data.datasets[0].data = nouvellesTemperatures;
+
+                        // Mettre à jour le graphique
+                        graphique.update();
+                    })
+                    .catch(error => console.error('Erreur lors du chargement des données:', error));
+            }
+
+            // Initialiser le graphique
+            initialiserGraphique();
+
+            // Mettre à jour les données du graphique toutes les 5 secondes
+            setInterval(mettreAJourGraphique, 5000);
+        });
+    </script>
+</body>
+</html>

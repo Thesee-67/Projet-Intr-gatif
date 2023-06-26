@@ -1,55 +1,72 @@
 {% extends "Collecteapp/liste.html" %}
 
 {% block title %}
-    Liste des Donnees du capteur
+Liste des Donnees du capteur
 {% endblock %}
 
 {% block content %}
 <script>
-    // Fonction pour rafraîchir la page
-    function rafraichirPage() {
-        location.reload(); // Rafraîchit la page actuelle
-    }
-
-    // Rafraîchir la page toutes les 5 secondes (5000 millisecondes)
-    setInterval(rafraichirPage, 5000);
+    setInterval(function() {
+    location.reload();
+    }, 10000);
 </script>
-<div class="container-listcap">
-    <a href="/Collecteapp/Donnees/ajouter_donnees/" class="btn-ajout">Ajouter des données</a>
-    <a href="/Collecteapp/Donnees/liste_dates/" class="btn-ajout">Filtre par Date et Heure</a>
-    <a href="/Collecteapp/Donnees/filtre_capteur/" class="btn-ajout">Filtre par Capteur</a>
-    <a href="/Collecteapp/Donnees/filtre_donnees/" class="btn-ajout">Filtre les Donnees</a>
-    <table>
-        <caption>Liste des Donnees</caption>
-        <thead>
-            <tr>
-                <th scope="col">Heure</th>
-                <th scope="col">Jour</th>
-                <th scope="col">Température</th>
-                <th scope="col">Nom du Capteur</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for donnes in donnees %}
+<div>
+    <div class="btn-bb">
+        <a href="/Collecteapp/Donnees/ajouter_donnees/" class="btn-ajout"
+    ><input type="submit" value="Ajouter des données"\></a
+  >
+  <a href="/Collecteapp/Donnees/liste_dates/" class="btn-bb"
+    ><input type="submit" value="Filtre par Date et Heure"\></a
+  >
+  <a href="/Collecteapp/Donnees/filtre_capteur/" class="btn-bb"
+    ><input type="submit" value="Filtre par Capteur"\></a
+  >
+  <a href="/Collecteapp/Donnees/filtre_donnees/" class="btn-bb"
+    ><input type="submit" value="Filtre les Données"\></a
+  >
+  <a href="/Collecteapp/Donnees/csv/" class="btn-bb"
+    ><input type="submit" value="Génération d'un CSV"\></a
+  >
+  <a href="/Collecteapp/Donnees/supprimer_toutes_donnees/" class="btn-bb"
+    ><input type="submit" value="Supprimer toutes les Donnees"\></a
+  >
+    </div>
+    
+    <div>
+        <table>
+            <caption>Liste des Données</caption>
+            <thead>
                 <tr>
-                    <td>{{ donnes.date }}</td>
-                    <td>{{ donnes.time }}</td>
-                    <td>{{ donnes.temps }}</td>
-                    <td>{{ donnes.id_capteur.id_capteur }}</td>
+                    <th scope="col">Heure</th>
+                    <th scope="col">Jour</th>
+                    <th scope="col">Température</th>
+                    <th scope="col">Nom du Capteur</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donnee in donnees %}
+                <tr>
+                    <td>{{ donnee.date }}</td>
+                    <td>{{ donnee.time }}</td>
+                    <td>{{ donnee.temps }}</td>
+                    <td>{{ donnee.id_capteur.id_capteur }}</td>
                     <td>
                         <form>
-                          <a href="/Collecteapp/Donnees/modifier_donnees/{{donnes.id}}/"class="btn-modifier">Modifier</a>
-                          <a href="/Collecteapp/Donnees/supprimer_donnees/{{donnes.id}}/"class="btn-supprimer">Supprimer</a>
+                            <a href="/Collecteapp/Donnees/modifier_donnees/{{donnee.id}}/"
+                                class="btn-modifier">Modifier</a>
+                            <a href="/Collecteapp/Donnees/supprimer_donnees/{{donnee.id}}/"
+                                class="btn-supprimer">Supprimer</a>
                         </form>
-                      </td>
+                    </td>
                 </tr>
-            {% empty %}
-            <tr>
-                <td colspan="2">Aucunne Donnees enregistré.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Aucune donnée enregistrée.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

@@ -17,6 +17,7 @@ html {
     );
     padding-left: 5%;
     padding-right: 5%;
+    padding-bottom: 5%;
 
   }
 
@@ -56,6 +57,10 @@ a{
 cartes 
 ==================================== */
 
+.container-2{
+  padding: 3cm;
+}
+
 .box {
   width: calc(60% - 5%); 
   margin-bottom: 10%; 
@@ -71,7 +76,7 @@ cartes
   transform: perspective(800px);
   transform-style: preserve-3d;
   cursor: pointer;
-
+  padding: 2.5cm;
 }
 
 .card-wrap:hover .card-info {
@@ -190,14 +195,17 @@ table {
   border: 1px solid #ccc;
   border-collapse: collapse;
   margin: 0;
-  padding: 0;
   width: 100%;
   table-layout: fixed;
+  padding-top: 1cm;
+  padding-bottom: 3cm;
 }
 
 table caption {
   font-size: 2em;
   margin: .5em 0 .75em;
+  padding-bottom: 0.5cm;
+  padding-top: 0.5cm;
 }
 
 table tr {
@@ -631,4 +639,142 @@ Animation keyframes
   nav li a:before {
     width: 15px;
   }
+}
+
+#msform {
+  width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+}
+
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+
+  position: relative;
+}
+
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+
+#msform input,
+#msform textarea {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2c3e50;
+  font-size: 13px;
+}
+
+#msform .action-button {
+  width: 150px;
+  background: #27ae60;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px 5px;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27ae60;
+}
+
+.fs-title1 {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #21262b;
+  margin-bottom: 10px;
+}
+
+.fs-title {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+#msform .fs-title,
+#msform .fs-subtitle {
+  text-align: left;
+}
+
+#msform .previous {
+  background-color: #bbb;
+}
+
+#msform .submit {
+  background-color: #27ae60;
+}
+
+#msform .return {
+  background-color: #27ae60;
+}
+
+#msform .submit:hover {
+  background-color: #2c3e50;
+}
+
+#msform .previous:hover {
+  background-color: #aaa;
+}
+#msform .return:hover {
+  background-color: #aaa;
+}
+
+.container-conf{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-bb{
+  padding-top: 1cm;
+  padding-bottom: 1cm;
+}
+.btn-bb a{
+  display: inline;
+  padding: 1cm;
+}
+
+.btn-bb1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1cm;
+}
+
+.btn-i{
+  color: blue;
+  padding: 1.5em;
+}
+
+.btn-ii{
+  color: red;
+  padding: 1.5em;
 }

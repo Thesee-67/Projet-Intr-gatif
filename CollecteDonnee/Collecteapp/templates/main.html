@@ -13,15 +13,24 @@
 <body>
     <h1 style="color: white; text-align: center; font-weight: bold; font-size: 48px; margin-top: 3%; margin-bottom: 3%;">RECUPERATION DE DONNEES</h1>
 
-    <div id="navbar">
-        <ul><h2>
-            <li><a href="/Collecteapp/">Menu</a>
-            <li><a href="/Collecteapp/Capteur/liste_capteur">Liste Capteur</a>
-            <li><a href="/Collecteapp/Donnees/liste_donnees">Liste Données</a>
-            <li><a href="/Collecteapp/graphique/">Graphique</a> 
-            </h2>
-        </ul>
-    </div>
+    <div class="overlay-navigation">
+        <nav role="navigation">
+          <ul>
+            <li><a href="/Collecteapp/" data-content="Le Début">Menu</a></li>
+            <li><a href="/Collecteapp/Capteur/liste_capteur" data-content="Les capteurs">Liste Capteur</a></li>
+            <li><a href="/Collecteapp/Donnees/liste_donnees" data-content="Les Donnéess">Liste Données</a></li>
+            <li><a href="/Collecteapp/capteurs/" data-content="Le Graphique">Graphique</a></li>
+            <li><a href="#" data-content="Contactez-nous">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <section class="home">
+        <div class="open-overlay">
+          <span class="bar-top"></span>
+          <span class="bar-middle"></span>
+          <span class="bar-bottom"></span>
+        </div>
+      </section>
 
 
 

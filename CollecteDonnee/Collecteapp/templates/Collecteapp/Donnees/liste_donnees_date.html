@@ -18,11 +18,31 @@
         <input type="text" name="heure_end" placeholder="hh:mm:ss" required>
         <button type="submit">Afficher les données</button>
     </form>
-
-        <h2>Données pour la période : {{ datetime_start|date:'d/m/Y H:i:s' }} - {{ datetime_end|date:'d/m/Y H:i:s' }}</h2>
-        <ul>
-            {% for donnee in donnees %}
-                <li>ID Capteur: {{ donnee.id_capteur.id_capteur }} - Date: {{ donnee.date }} - Heure: {{ donnee.time }} - Température: {{ donnee.temps }}</li>
-            {% endfor %}
-        </ul>
+        {% if donnees %}
+        <table>
+            <caption>Données pour la période : {{ datetime_start|date:'d/m/Y H:i:s' }} - {{ datetime_end|date:'d/m/Y H:i:s' }}</caption>
+            <thead>
+                <tr>
+                    <th scope="col">ID Capteur</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Heure</th>
+                    <th scope="col">Température</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donnee in donnees %}
+                <tr>
+                    <td>{{ donnee.id_capteur.id_capteur }}</td>
+                    <td>{{ donnee.date }}</td>
+                    <td>{{ donnee.time }}</td>
+                    <td>{{ donnee.temps }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Aucune donnée enregistrée.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}
