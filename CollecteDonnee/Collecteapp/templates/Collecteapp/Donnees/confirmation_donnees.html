@@ -5,11 +5,17 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2>Enregistrement réussi</h2>
-        <p>Merci, les données ont été enregistrées avec succès dans la base de données.</p>
+    <div class="container-conf">
+        <h2>Enregistrement réussi<br><br></h2>
+    </div>
+    <div class="container-conf">
+        <p>Merci, les données ont été enregistrées avec succès dans la base de données.<br><br></p>
+    </div>
+    <div class="container-conf">
         <form>
-            <button class="btn-modifier"><a href="/Collecteapp/Donnees/liste_donnees/">Menu</a></button>
+            <div class="confirmation-buttons">
+                <a href="/Collecteapp/Donnees/liste_donnees/" class="btn-i">Retour</a>
+            </div>
         </form>
     </div>
 {% endblock %}

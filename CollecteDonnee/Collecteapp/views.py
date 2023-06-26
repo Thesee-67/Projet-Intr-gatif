@@ -254,6 +254,9 @@ def graphique(request):
 
     return render(request, 'Collecteapp/graphique.html', context)
 
+def contact(request):
+    return render(request, 'Collecteapp/contact.html')
+
 
 class ModelList(generics.ListCreateAPIView):
     queryset = Donnees.objects.all()

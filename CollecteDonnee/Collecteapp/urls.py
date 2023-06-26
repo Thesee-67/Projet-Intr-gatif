@@ -25,6 +25,7 @@ urlpatterns = [
     path('Donnees/supprimer_confirm_toutes_donnees/', views.supprimer_confirm_toutes_donnees),
     path('capteurs/', views.selection_capteurs, name='selection_capteurs'),
     path('graphique/', views.graphique, name='graphique'),
+    path('contact/', views.contact, name='contact'),
     path('api/models/', views.ModelList.as_view(), name='model-list'),
     # Endpoint pour récupérer, mettre à jour ou supprimer un objet spécifique
     path('api/models/<int:pk>/', views.ModelDetail.as_view(), name='model-detail'),
