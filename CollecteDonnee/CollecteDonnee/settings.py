@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sae24',
         'USER': 'root',
-        'PASSWORD': 'toto',
+        'PASSWORD': '04/11/17',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -138,3 +138,5 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

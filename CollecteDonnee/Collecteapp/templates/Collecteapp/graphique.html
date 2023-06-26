@@ -1,6 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends "main.html" %}
+
+{% block title %}
+    Graphique en temps Réel du Capteur
+{% endblock %}
+
+{% block content %}
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body, html {
             height: 100%;
@@ -53,7 +60,6 @@
             font-size: 16px;
         }
     </style>
-    <title>Graphique en temps réel</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -70,21 +76,25 @@
             let graphique;
 
             // Récupérer les données du contexte Django
-            const dates = JSON.parse('{{ dates|safe }}');
-            const heures = JSON.parse('{{ heures|safe }}');
-            const temperatures = JSON.parse('{{ temperatures|safe }}');
+            const dates = JSON.parse('{{ date|safe }}');
+            const time = JSON.parse('{{ time|safe }}');
+            const temps = JSON.parse('{{ temps|safe }}');
 
-            // Filtrer les dix dernières valeurs
+            console.log('Dates:', dates);
+            console.log('Heures:', time);
+            console.log('Températures:', temps);
+
+            // Filtrer les dix dernières valeurs lors de l'initialisation du graphique
             const dernieresDates = dates.slice(-10);
-            const dernieresHeures = heures.slice(-10);
-            const dernieresTemperatures = temperatures.slice(-10);
+            const dernieresHeures = time.slice(-10);
+            const dernieresTemperatures = temps.slice(-10);
 
             // Initialiser le graphique avec les données filtrées
             function initialiserGraphique() {
                 graphique = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: dernieresHeures,
+                        labels: dernieresDates.map((date, index) => date + ' ' + dernieresHeures[index]),  // Concaténer la date et l'heure
                         datasets: [{
                             label: 'Température',
                             data: dernieresTemperatures,
@@ -144,23 +154,39 @@
 
             // Mettre à jour les données du graphique
             function mettreAJourGraphique() {
+                console.log('Mise à jour du graphique');
+
                 // Effectuer une requête AJAX pour récupérer les nouvelles données depuis le serveur
-                fetch('/api/donnees-en-temps-reel/')
+                fetch('/api/models/')
                     .then(response => response.json())
                     .then(data => {
-                        const nouvellesDates = data.map(entry => entry.date);
-                        const nouvellesHeures = data.map(entry => entry.heure);
+                        console.log('Données récupérées:', data);
+
+                        const nouvellesDates = data.map(entry => entry.date + ' ' + entry.time);  // Concaténer la date et l'heure
                         const nouvellesTemperatures = data.map(entry => entry.temps);
 
-                        // Mettre à jour les labels et les données du graphique
-                        graphique.data.labels = nouvellesHeures;
-                        graphique.data.datasets[0].data = nouvellesTemperatures;
+                        // Vérifier si le nombre de nouvelles données est supérieur à dix
+                        if (nouvellesDates.length > 10) {
+                            // Filtrer les dix dernières valeurs
+                            const dernieresDates = nouvellesDates.slice(-10);
+                            const dernieresTemperatures = nouvellesTemperatures.slice(-10);
+
+                            // Mettre à jour les labels et les données du graphique avec les dix dernières valeurs
+                            graphique.data.labels = dernieresDates;
+                            graphique.data.datasets[0].data = dernieresTemperatures;
+                        } else {
+                            // Mettre à jour les labels et les données du graphique avec toutes les nouvelles valeurs
+                            graphique.data.labels = nouvellesDates;
+                            graphique.data.datasets[0].data = nouvellesTemperatures;
+                        }
 
                         // Mettre à jour le graphique
                         graphique.update();
                     })
                     .catch(error => console.error('Erreur lors du chargement des données:', error));
             }
+
+
 
             // Initialiser le graphique
             initialiserGraphique();
@@ -175,4 +201,5 @@
         }
     </script>
 </body>
-</html>
+{% endblock %}
+

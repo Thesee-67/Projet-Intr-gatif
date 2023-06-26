@@ -10,10 +10,10 @@ from datetime import datetime
 from django.db.models import Q
 import io
 import json
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 import csv
+from rest_framework import generics
+from .serializers import ModelSerializer
 
 
 
@@ -241,15 +241,15 @@ def graphique(request):
     capteur = Capteur.objects.get(id_capteur=capteur_id)
     donnees = Donnees.objects.filter(id_capteur=capteur_id)
 
-    dates = [str(donnee.date) for donnee in donnees]
-    heures = [str(donnee.time) for donnee in donnees]
-    temperatures = [donnee.temps for donnee in donnees]
+    date = [str(donnee.date) for donnee in donnees]
+    time = [str(donnee.time) for donnee in donnees]
+    temps = [donnee.temps for donnee in donnees]
 
     context = {
         'capteur': capteur,
-        'dates': json.dumps(dates),
-        'heures': json.dumps(heures),
-        'temperatures': json.dumps(temperatures),
+        'date': json.dumps(date),
+        'time': json.dumps(time),
+        'temps': json.dumps(temps),
     }
 
     return render(request, 'Collecteapp/graphique.html', context)
@@ -257,5 +257,13 @@ def graphique(request):
 def contact(request):
     return render(request, 'Collecteapp/contact.html')
 
+
+class ModelList(generics.ListCreateAPIView):
+    queryset = Donnees.objects.all()
+    serializer_class = ModelSerializer
+
+class ModelDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Donnees.objects.all()
+    serializer_class = ModelSerializer
 
 
