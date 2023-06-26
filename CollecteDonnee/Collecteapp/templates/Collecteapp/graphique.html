@@ -11,10 +11,6 @@
     <style>
         body, html {
             height: 100%;
-            background: linear-gradient(
-            rgba(4, 99, 128, 0.6),
-            rgba(220, 180, 2, 0.6)
-            );
             margin: 0;
             padding: 0;
         }
@@ -46,19 +42,6 @@
             background-color: black;
         }
 
-        /* Ajout du style pour le bouton */
-        #menu-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            background-color: #ffffff;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -66,9 +49,6 @@
     <div id="graphique-container">
         <canvas id="graphique"></canvas>
     </div>
-
-    <!-- Ajout du bouton -->
-    <button id="menu-button" onclick="retournerAuMenu()">Retourner au menu</button>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -194,11 +174,6 @@
             // Mettre à jour les données du graphique toutes les 5 secondes
             setInterval(mettreAJourGraphique, 5000);
         });
-
-        // Fonction pour retourner au menu
-        function retournerAuMenu() {
-            window.location.href = "/Collecteapp/";
-        }
     </script>
 </body>
 {% endblock %}
