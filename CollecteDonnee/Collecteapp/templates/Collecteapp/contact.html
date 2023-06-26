@@ -1,21 +1,104 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="UTF-8" />
     <title>Contactez-nous</title>
-</head>
-<body>
-    <h1>Contactez-nous</h1>
-    <form action="https://discord.com/api/webhooks/123456789012345678/abcdefg" method="POST">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'Collecteapp/style.css' %}"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      function sendEmail() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var message = document.getElementById("message").value;
+
+        emailjs.init("bqAp0I6aW8xX9YuUp"); // Remplacez YOUR_USER_ID par votre ID utilisateur EmailJS
+
+        var templateParams = {
+          from_name: name,
+          from_email: email,
+          to_email: "james.schmitt@uha.fr",
+          message_html: message,
+        };
+
+        emailjs
+          .send("service_1i4ot37", "template_voh0kxq", templateParams) // Remplacez YOUR_SERVICE_ID et YOUR_TEMPLATE_ID par vos propres valeurs
+          .then(
+            function (response) {
+              alert("Le message a été envoyé avec succès !");
+              document.getElementById("contact-form").reset();
+            },
+            function (error) {
+              alert(
+                "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer plus tard."
+              );
+              console.log("Erreur:", error);
+            }
+          );
+      }
+    </script>
+    <style>
+      /* Ajout du style pour le bouton */
+      #menu-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        background-color: #ffffff;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      /* Style pour centrer le formulaire */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #msform {
+        text-align: center;
+      }
+    </style>
+  </head>
+  {% block content %}
+  <body>
+    <!-- Ajout du bouton -->
+    <button id="menu-button" onclick="retournerAuMenu()">Retourner au menu</button>
+
+    <form id="msform" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset>
+        <h2 class="fs-title">Contactez-nous</h2>
         <label for="name">Nom :</label>
-        <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required><br><br>
-        
+        <input type="text" id="name" required /><br />
+
+        <label for="email">E-mail :</label>
+        <input type="email" id="email" required /><br />
+
         <label for="message">Message :</label>
-        <textarea id="message" name="message" required></textarea><br><br>
-        
-        <input type="submit" value="Envoyer">
+        <textarea id="message" required></textarea><br />
+
+        <button type="button" onclick="sendEmail()">Envoyer</button>
+      </fieldset>
     </form>
-</body>
+  </body>
+  {% endblock %}
+
+  <script>
+    // Fonction pour retourner au menu
+    function retournerAuMenu() {
+      window.location.href = "/Collecteapp/";
+    }
+  </script>
 </html>
