@@ -6,48 +6,11 @@
 
 {% block content %}
 <head>
-    <style>
-        html {
-            height: 100%;
-            background: linear-gradient(
-            rgba(4, 99, 128, 0.6),
-            rgba(220, 180, 2, 0.6)
-            );
-            padding-left: 5%;
-            padding-right: 5%;
-            padding-bottom: 5%;
-            margin: 0;
-            padding: 0;
-        }
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 25%;
-        }
-
-        /* Ajout du style pour le bouton */
-        #menu-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            background-color: #ffffff;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-    </style>
     <title>Graphique en temps réel</title>
     <title>Sélection du Capteur</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- Ajout du bouton -->
-    <button id="menu-button" onclick="retournerAuMenu()">Retourner au menu</button>
-
     <form action="/graphique/" method="get">
         <label for="capteur">Sélectionnez un capteur :</label>
         <select id="capteur" name="capteur">
@@ -57,12 +20,5 @@
         </select>
         <button type="submit">Afficher le graphique</button>
     </form>
-
-    <script>
-        // Fonction pour retourner au menu
-        function retournerAuMenu() {
-            window.location.href = "/Collecteapp/";
-        }
-    </script>
 </body>
 {% endblock %}
