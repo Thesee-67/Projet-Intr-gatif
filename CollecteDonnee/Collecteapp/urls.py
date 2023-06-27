@@ -27,8 +27,6 @@ urlpatterns = [
     path('graphique/', views.graphique, name='graphique'),
     path('contact/', views.contact, name='contact'),
     path('api/models/', views.ModelList.as_view(), name='model-list'),
-    # Endpoint pour récupérer, mettre à jour ou supprimer un objet spécifique
     path('api/models/<int:pk>/', views.ModelDetail.as_view(), name='model-detail'),
-    #path('receive_message/', views.receive_message, name='receive_message'),
 
 ]
