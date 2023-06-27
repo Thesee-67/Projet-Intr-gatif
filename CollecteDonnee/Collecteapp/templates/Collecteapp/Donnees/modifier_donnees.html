@@ -4,7 +4,7 @@
     <form id="msform" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset>
-          <h2 class="fs-title">Modifier les Donnes du Capteur "{{ donnees.id }}"</h2>
+          <h2 class="fs-title">Modifier les Donnes du Capteur</h2>
           <div class="form-group">
             <label for="date">Date de Sortie:</label>
             <input type="date" name="date" id="date" required>

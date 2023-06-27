@@ -36,15 +36,13 @@ def ajouter_capteur(request):
         form = CapteurForm()    
     return render(request, 'Collecteapp/Capteur/ajouter_capteur.html',{'form': form})
 
-# Only for prod
 def modifier_capteur(request, id_capteur):
-    capteurs = Capteur.objects.get(pk=id_capteur)
-    form = CapteurForm(request.POST or None, instance=capteurs)
+    capteur = Capteur.objects.get(pk=id_capteur)
+    form = CapteurForm(request.POST or None, instance=capteur)
     if form.is_valid():
         form.save()
         return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteur/")
-
-    return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'form': form, 'capteurs': capteurs})
+    return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'form': form, 'capteur': capteur})
 
 
 def supprimer_capteur(request, id_capteur):
