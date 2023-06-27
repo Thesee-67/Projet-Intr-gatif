@@ -14,6 +14,7 @@ db_name = "sae24"
 # Variable de données temporaires
 fichier_temporaire = "MQTT/donnees_temporaires.json"
 
+
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connexion établie avec succès")
@@ -34,8 +35,9 @@ def on_message(client, userdata, msg):
     payload_parts = msg.payload.decode().split(",")
     values = {}
     for part in payload_parts:
-        key, value = part.split("=")
-        values[key.strip()] = value.strip()
+        if "=" in part:
+            key, value = part.split("=")
+            values[key.strip()] = value.strip()
 
     try:
         db_connection = mysql.connector.connect(
@@ -49,7 +51,7 @@ def on_message(client, userdata, msg):
 
         # Insertion du capteur s'il n'existe pas déjà
         sql_query_capteur = "INSERT IGNORE INTO capteur (id_capteur, PIECE) VALUES (%s, %s)"
-        cursor.execute(sql_query_capteur, (values.get("Id"), "Maison1"))
+        cursor.execute(sql_query_capteur, (values.get("Id"), values.get("piece")))
         db_connection.commit()
 
         # Conversion de la date au format anglais
@@ -65,13 +67,13 @@ def on_message(client, userdata, msg):
             print("Erreur: La valeur de date est manquante.")
             return
         
-        # Insertion des données dans la table "details"
-        sql_query_details = "INSERT IGNORE INTO Capteur (id_capteur, piece) VALUES (%s, %s) ON DUPLICATE KEY UPDATE PIECE=VALUES(PIECE)"
-        cursor.execute(sql_query_details, (values.get("Id"), values.get("piece")))
-        db_connection.commit()
+        # Ajout de date_str et date_en dans le dictionnaire values
+        values["date_str"] = date_str
+        values["date_en"] = date_en
 
+        # Insertion des données dans la table "details"
         sql_query_details = "INSERT INTO Donnees (id_capteur_id, date, time, temps) VALUES (%s, %s, %s, %s)"
-        cursor.execute(sql_query_details, (values.get("Id"),date_en, values.get("time"), values.get("temp")))
+        cursor.execute(sql_query_details, (values.get("Id"), values.get("date_en"), values.get("time"), values.get("temp")))
         db_connection.commit()
 
         print("Données insérées avec succès dans la base de données.")
@@ -85,7 +87,7 @@ def on_message(client, userdata, msg):
                 donnees_temporaires = json.load(file)
         except FileNotFoundError:
             pass
-        donnees_temporaires.append(msg.payload.decode())
+        donnees_temporaires.append(values)
         with open(fichier_temporaire, "w") as file:
             json.dump(donnees_temporaires, file)
 
@@ -95,6 +97,7 @@ def on_message(client, userdata, msg):
         if db_connection is not None and db_connection.is_connected():
             db_connection.close()
 
+
 def retransmettre_donnees_temporaires():
     try:
         with open(fichier_temporaire, "r") as file:
@@ -103,6 +106,7 @@ def retransmettre_donnees_temporaires():
                 client.publish("IUT/Colmar2023/SAE2.04/Maison1", json.dumps(donnees_temporaires))
     except FileNotFoundError:
         pass
+
 
 client = mqtt.Client()
 
