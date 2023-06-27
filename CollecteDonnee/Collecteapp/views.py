@@ -39,9 +39,14 @@ def ajouter_capteur(request):
 def modifier_capteur(request, id_capteur):
     capteur = Capteur.objects.get(pk=id_capteur)
     form = CapteurForm(request.POST or None, instance=capteur)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteur/")
+    
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteur/")
+    else:
+        form = CapteurForm(instance=capteur)
+
     return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'form': form, 'capteur': capteur})
 
 
