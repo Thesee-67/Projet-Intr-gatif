@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 import mysql.connector
 from datetime import datetime
-
+import json
 
 broker = "test.mosquitto.org"
 topics = ["IUT/Colmar2023/SAE2.04/Maison1", "IUT/Colmar2023/SAE2.04/Maison2"]
@@ -11,6 +11,8 @@ db_user = "root"
 db_password = "04/11/17"
 db_name = "sae24"
 
+# Variable de données temporaires
+fichier_temporaire = "MQTT/donnees_temporaires.json"
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -23,6 +25,7 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
+    retransmettre_donnees_temporaires()
     print("Message reçu. Topic =", msg.topic, " | Payload =", msg.payload.decode())
     db_connection = None
     cursor = None
@@ -75,6 +78,16 @@ def on_message(client, userdata, msg):
 
     except mysql.connector.Error as error:
         print("Erreur lors de la connexion à la base de données:", error)
+        # Stocker temporairement les données dans un fichier
+        donnees_temporaires = []
+        try:
+            with open(fichier_temporaire, "r") as file:
+                donnees_temporaires = json.load(file)
+        except FileNotFoundError:
+            pass
+        donnees_temporaires.append(msg.payload.decode())
+        with open(fichier_temporaire, "w") as file:
+            json.dump(donnees_temporaires, file)
 
     finally:
         if cursor is not None:
@@ -82,7 +95,14 @@ def on_message(client, userdata, msg):
         if db_connection is not None and db_connection.is_connected():
             db_connection.close()
 
-    
+def retransmettre_donnees_temporaires():
+    try:
+        with open(fichier_temporaire, "r") as file:
+            donnees_temporaires = json.load(file)
+            if donnees_temporaires:
+                client.publish("IUT/Colmar2023/SAE2.04/Maison1", json.dumps(donnees_temporaires))
+    except FileNotFoundError:
+        pass
 
 client = mqtt.Client()
 
@@ -91,5 +111,8 @@ client.on_message = on_message
 
 # Connexion au broker MQTT
 client.connect(broker, 1883, 60)
+
+# Retransmettre les données temporaires au redémarrage
+retransmettre_donnees_temporaires()
 
 client.loop_forever()
