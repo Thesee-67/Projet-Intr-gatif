@@ -5,7 +5,7 @@ from django import forms
 class CapteurForm(forms.ModelForm):
     class Meta:
         model = Capteur
-        fields = "__all__"
+        fields = ['id_capteur', 'piece']
 
 
 class DonnesForm(forms.ModelForm):

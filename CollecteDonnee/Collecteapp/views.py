@@ -42,18 +42,13 @@ def modifier_capteur(request, id_capteur):
     capteur = get_object_or_404(Capteur, pk=id_capteur)
 
     if request.method == 'POST':
-        # Récupérer les données soumises
         piece = request.POST['piece']
-
-        # Mettre à jour les champs spécifiques du modèle
         capteur.piece = piece
-
-        # Sauvegarder les modifications
         capteur.save()
-
         return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteur/")
 
-    return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'capteur': capteur})
+    form = CapteurForm(instance=capteur)
+    return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'form': form, 'capteur': capteur})
 
 
 def supprimer_capteur(request, id_capteur):
