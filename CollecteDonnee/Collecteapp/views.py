@@ -36,18 +36,24 @@ def ajouter_capteur(request):
         form = CapteurForm()    
     return render(request, 'Collecteapp/Capteur/ajouter_capteur.html',{'form': form})
 
+from django.shortcuts import get_object_or_404
+
 def modifier_capteur(request, id_capteur):
-    capteur = Capteur.objects.get(pk=id_capteur)
+    capteur = get_object_or_404(Capteur, pk=id_capteur)
 
     if request.method == 'POST':
-        form = CapteurForm(request.POST, instance=capteur)
-        if form.is_valid():
-            form.save()
-            return render(request, "Collecteapp/Capteur/liste_capteur.html")
-    else:
-        form = CapteurForm(instance=capteur)
+        # Récupérer les données soumises
+        piece = request.POST['piece']
 
-    return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'form': form, 'capteur': capteur})
+        # Mettre à jour les champs spécifiques du modèle
+        capteur.piece = piece
+
+        # Sauvegarder les modifications
+        capteur.save()
+
+        return HttpResponseRedirect("/Collecteapp/Capteur/liste_capteur/")
+
+    return render(request, 'Collecteapp/Capteur/modifier_capteur.html', {'capteur': capteur})
 
 
 def supprimer_capteur(request, id_capteur):
