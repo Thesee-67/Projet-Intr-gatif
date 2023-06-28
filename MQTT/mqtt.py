@@ -1,9 +1,10 @@
 import paho.mqtt.client as mqtt
 import mysql.connector
 from datetime import datetime
+
+
 broker = "test.mosquitto.org"
 topics = ["IUT/Colmar2023/SAE2.04/Maison1", "IUT/Colmar2023/SAE2.04/Maison2"]
-
 db_host = "localhost"
 db_user = "root"
 db_password = "toto"
@@ -54,7 +55,7 @@ def on_message(client, userdata, msg):
             print("Erreur: La valeur de date est manquante.")
             return
         
-        # Insertion des données dans la table "details"
+        # Insertion des données dans la table "Capteur"
         sql_query_details = "INSERT IGNORE INTO Capteur (id_capteur, piece) VALUES (%s, %s) ON DUPLICATE KEY UPDATE PIECE=VALUES(PIECE)"
         cursor.execute(sql_query_details, (values.get("Id"), values.get("piece")))
         db_connection.commit()
