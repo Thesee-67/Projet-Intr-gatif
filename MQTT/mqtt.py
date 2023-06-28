@@ -8,7 +8,7 @@ topics = ["IUT/Colmar2023/SAE2.04/Maison1", "IUT/Colmar2023/SAE2.04/Maison2"]
 db_host = "localhost"
 db_user = "root"
 db_password = "toto"
-db_password = "04/11/17"
+db_password = "toto"
 db_name = "sae24"
 
 
